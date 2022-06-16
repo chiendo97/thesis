@@ -1,0 +1,68 @@
+\documentclass[12pt]{extreport}
+
+\usepackage{lipsum}
+
+\usepackage[utf8]{vietnam}
+\usepackage{graphicx}
+
+\usepackage{mathptmx}
+
+\usepackage{indentfirst}
+
+\usepackage[
+    a4paper,
+    left=3cm, % lề trái
+    right=2cm, % lề phải
+    bottom=3cm, % lề dưới
+    top=2.5cm % lề trên
+]{geometry}
+
+\usepackage{setspace}
+\setstretch{1.3}
+
+\graphicspath{ {images/} }
+
+\title{Title}
+\author{Author Name}
+\date{Day Month Year}
+
+\begin{document}
+
+\maketitle
+
+\pagenumbering{roman}
+
+\addcontentsline{toc}{chapter}{PHÊ DUYỆT CỦA GIẢNG VIÊN HƯỚNG DẪN}
+\chapter*{Phê duyệt của giảng viên hướng dẫn}
+\input{chapters/author}
+
+\addcontentsline{toc}{chapter}{LỜI MỞ ĐẦU}
+\chapter*{Lời mở đầu}
+\input{chapters/introduction}
+
+\addcontentsline{toc}{chapter}{TÓM TẮT}
+\chapter*{Tóm tắt}
+\input{chapters/summary}
+
+\tableofcontents
+
+\addcontentsline{toc}{chapter}{DANH SÁCH HÌNH VẼ}
+\listoffigures
+
+\addcontentsline{toc}{chapter}{DANH SÁCH BẢNG}
+\listoftables
+
+\chapter{GIỚI THIỆU TỔNG QUAN}
+\pagenumbering{arabic}
+\input{chapters/chapter01}
+
+\chapter{KIẾN THỨC HỆ THỐNG}
+\input{chapters/chapter02}
+
+\chapter{TRIỂN KHAI VÀ THỰC NGHIỆM}
+\input{chapters/chapter03}
+
+\chapter{KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN}
+\input{chapters/chapter04}
+
+\end{document}
