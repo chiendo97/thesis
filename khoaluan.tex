@@ -3,6 +3,7 @@
 \usepackage{lipsum}
 
 \usepackage[utf8]{vietnam}
+
 \usepackage{graphicx}
 
 \usepackage{mathptmx}
@@ -22,6 +23,11 @@
 
 \graphicspath{ {images/} }
 
+% Custom commands
+\newcommand{\bfitem}[2]{
+  \item\textbf{#1}{: #2}
+}
+
 \title{Title}
 \author{Author Name}
 \date{Day Month Year}
@@ -33,15 +39,12 @@
 \pagenumbering{roman}
 
 \addcontentsline{toc}{chapter}{PHÊ DUYỆT CỦA GIẢNG VIÊN HƯỚNG DẪN}
-\chapter*{Phê duyệt của giảng viên hướng dẫn}
 \input{chapters/author}
 
 \addcontentsline{toc}{chapter}{LỜI MỞ ĐẦU}
-\chapter*{Lời mở đầu}
 \input{chapters/introduction}
 
 \addcontentsline{toc}{chapter}{TÓM TẮT}
-\chapter*{Tóm tắt}
 \input{chapters/summary}
 
 \tableofcontents
@@ -52,17 +55,12 @@
 \addcontentsline{toc}{chapter}{DANH SÁCH BẢNG}
 \listoftables
 
-\chapter{GIỚI THIỆU TỔNG QUAN}
-\pagenumbering{arabic}
 \input{chapters/chapter01}
 
-\chapter{KIẾN THỨC HỆ THỐNG}
 \input{chapters/chapter02}
 
-\chapter{TRIỂN KHAI VÀ THỰC NGHIỆM}
 \input{chapters/chapter03}
 
-\chapter{KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN}
 \input{chapters/chapter04}
 
 \end{document}
