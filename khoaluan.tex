@@ -1,5 +1,16 @@
 \documentclass[12pt]{extreport}
 
+\usepackage{multirow}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
 \usepackage{lipsum}
 
 \usepackage[utf8]{vietnam}
@@ -38,13 +49,10 @@
 
 \pagenumbering{roman}
 
-\addcontentsline{toc}{chapter}{PHÊ DUYỆT CỦA GIẢNG VIÊN HƯỚNG DẪN}
 \input{chapters/author}
 
-\addcontentsline{toc}{chapter}{LỜI MỞ ĐẦU}
 \input{chapters/introduction}
 
-\addcontentsline{toc}{chapter}{TÓM TẮT}
 \input{chapters/summary}
 
 \tableofcontents

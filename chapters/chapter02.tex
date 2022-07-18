@@ -36,7 +36,7 @@ Lớp này tạo ra một sự trừu tượng giữa các thực thể miền v
 
 \textbf{Services Layer - Lớp dịch vụ}
 
-Lớp Dịch vụ giữ các giao diện với các hoạt động phổ biến, chẳng hạn như Thêm, Lưu, Chỉnh sửa và Xóa. Ngoài ra, lớp này được sử dụng để giao tiếp giữa lớp UI và lớp kho lưu trữ. Lớp Dịch vụ cũng có thể giữ logic nghiệp vụ cho một thực thể. Trong lớp này, các giao diện dịch vụ được giữ riêng biệt với quá trình triển khai của nó, giữ cho sự liên kết lỏng và tách biệt các mối quan tâm trong tâm trí.
+Lớp Dịch vụ giữ các giao diện với các hoạt động phổ biến, chẳng hạn như Thêm, Lưu, Chỉnh sửa và Xóa. Ngoài ra, lớp này được sử dụng để giao tiếp giữa lớp UI và lớp kho lưu trữ. Lớp Dịch vụ cũng có thể giữ logic nghiệp vụ cho một thực thể. Trong lớp này, các giao diện dịch vụ được giữ với quá trình triển khai của nó, giữ cho sự liên kết lỏng và tách biệt các mối quan tâm trong tâm trí.
 
 \textbf{UI Layer - Lớp giao diện người dùng}
 
@@ -80,30 +80,125 @@ Mô-đun được hình thành dựa trên việc nhóm những lớp có mức 
 
 \subsection{Hệ thống frontend}
 
-\subsubsection{Khởi tạo A/B Test}
+\subsubsection{Hệ thống Trang}
 
-\subsubsection{Kết quả A/B Test}
+Hệ thống frontend có các hệ thống Trang sau đây: Product, Layer, Experiment và Test Group. Mỗi hệ thống Trang bao gồm có hệ thống Đường dẫn, mỗi Đường dẫn có một nhiệm vụ cụ thể được ghi chú trong Chú thích.
+
+Mỗi thực thể đều có một hệ thống Trang nhằm mục đích cho người dùng có thể khởi tạo, cập nhập và thay đổi theo ý muốn. Ngoài ra người dùng có thể có cái nhìn toàn cảnh với mỗi thực thể.
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|c|l|p{5cm}|}
+		\hline
+		Trang                       & Đường dẫn                                       & Chú thích                                      \\ \hline
+		\multirow{4}{*}{Product}    & /product                                        & Hiển thị toàn bộ Product                       \\ \cline{2-3}
+		                            & /product/new                                    & Khởi tạo một Product mới                       \\ \cline{2-3}
+		                            & /product/:id                                    & Hiển thị một Product                           \\ \cline{2-3}
+		                            & /product/:id/update                             & Cập nhật một Product                           \\ \hline
+		\multirow{4}{*}{Layer}      & /product/:id/layer                              & Hiển thị toàn bộ Layer của một Product         \\ \cline{2-3}
+		                            & /product/:id/layer/new                          & Khởi tạo một Layer mới                         \\ \cline{2-3}
+		                            & /product/:id/layer/:id                          & Hiển thị một Layer                             \\ \cline{2-3}
+		                            & /product/:id/layer/:id/update                   & Cập nhật một Layer                             \\ \hline
+		\multirow{4}{*}{Experiment} & /product/:id/layer/:id/exp                      & Hiển thị toàn bộ Experiment của một Layer      \\ \cline{2-3}
+		                            & /product/:id/layer/:id/exp/new                  & Khởi tạo một Experiment mới                    \\ \cline{2-3}
+		                            & /product/:id/layer/:id/exp/:id                  & Hiển thị một Layer                             \\ \cline{2-3}
+		                            & /product/:id/layer/:id/exp/:id/update           & Cập nhật một Layer                             \\ \hline
+		\multirow{4}{*}{Group}      & /product/:id/layer/:id/exp/:id/group            & Hiển thị toàn bộ Test Group của một Experiment \\ \cline{2-3}
+		                            & /product/:id/layer/:id/exp/:id/group/new        & Khởi tạo một Test Group mới                    \\ \cline{2-3}
+		                            & /product/:id/layer/:id/exp/:id/group/:id        & Hiển thị một Test Group                        \\ \cline{2-3}
+		                            & /product/:id/layer/:id/exp/:id/group/:id/update & Cập nhật một Test Group                        \\ \hline
+	\end{tabular}
+	\caption{Hệ thống Trang}
+\end{table}
+
+\subsubsection{Các thành phần}
+
+Hệ thống frontend gồm các thành phần sau: Types, Pages, Features.
+
+\begin{itemize}
+	\bfitem{Types}{Mục đích là tổng hợp các thực thể ở tầng Frontend, bao gồm hai loại là Thực thể gốc và nội dung khi nhận/gửi API}
+	\bfitem{Pages}{Là thành phần xử lý hệ thống Trang, mỗi file sẽ là một hệ thống Trang khác nhau}
+	\bfitem{Features}{Là thành phần xử lý hệ thống thông tin cho toàn bộ hệ thống Frontend, bao gồm cả việc nhận, gửi dữ liệu từ Server}
+\end{itemize}
 
 \subsection{Hệ thống backend}
 
-\subsubsection{Khởi tạo A/B Test}
+\subsubsection{Các thành phần}
 
-\subsubsection{Thực hiện A/B Test}
+Hệ thống backend gồm các thành phần sau: Service, Storage, Database, Types
 
-\subsubsection{Đánh giá A/B Test}
+\begin{itemize}
+	\bfitem{Service}{Là thành phần xử lý hệ thống HTTP, chuyên nhận và phản hồi các truy cập từ hệ thống Frontend}
+	\bfitem{Storage}{Là thành phần xử lý hệ thống tổng hợp thông tin cho hệ thống Backend}
+	\bfitem{Database}{Là thành phần xử lý hệ thống quản lý dữ liệu cho hệ thống Backend}
+	\bfitem{Types}{Tổng hợp các thực thể ở tầng Backend, bao gồm 2 loại là: Thực thể gốc và nội dung khi nhận/gửi API}
+\end{itemize}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width = 1\textwidth]{backend}
+	\caption{Hệ thống Backend}
+\end{figure}
+
+\subsubsection{Hệ thống đường dẫn}
+
+Hệ thống đường dẫn bao gồm các thực thể sau: Summary, AbTest, Product, Layer, Experiment và Test Group.
+
+Mỗi thực thể có chức năng riêng biệt nhau.
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Thực thể}           & \textbf{Đường dẫn} & \textbf{Chú thích}                          \\ \hline
+		Summary                     & /summary           & Gọi toàn bộ thông tin của hệ thống A/B Test \\ \hline
+		AbTest                      & /abtest            & Thực hiện A/B Test                          \\ \hline
+		\multirow{2}{*}{Product}    & /product/create    & Khởi tạo Product mới                        \\ \cline{2-3}
+		                            & /product/update    & Cập nhật Product                            \\ \hline
+		\multirow{2}{*}{Layer}      & /layer/create      & Khởi tạo Layer mới                          \\ \cline{2-3}
+		                            & /layer/update      & Cập nhật Layer                              \\ \hline
+		\multirow{2}{*}{Experiment} & /exp/create        & Khởi tạo Experiment mới                     \\ \cline{2-3}
+		                            & /exp/update        & Cập nhật Experiment                         \\ \hline
+		\multirow{2}{*}{Test Group} & /group/create      & Khởi tạo Test Group mới                     \\ \cline{2-3}
+		                            & /group/update      & Cập nhật Test Group mới                     \\ \hline
+	\end{tabular}
+	\caption{Hệ thống đường dẫn}
+\end{table}
 
 \subsection{Biểu đồ tuần tự}
 
-\subsubsection{Khởi tạo A/B Test}
+\subsubsection{Biểu đồ tuần tự chung}
 
-\subsubsection{Thực hiện A/B Test}
+Biểu đồ tuần tự chung biểu thị việc khởi tạo và sử dụng A/B Test.
 
-\subsubsection{Đánh giá A/B Test}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width = 1\textwidth]{overview-sequence}
+	\caption{Biểu đồ tuần tự chung}
+\end{figure}
+
+\subsubsection{Biểu đồ tuần tự khởi tạo A/B Test}
+
+Biểu đồ tuần tự khởi tạo A/B Test biểu thị
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width = 1\textwidth]{abtest-sequence}
+	\caption{Biểu đồ tuần tự khởi tạo A/B Test}
+\end{figure}
 
 \section{Mô hình cơ sở dữ liệu}
 
-\subsection{Mô hình quản lý A/B Test}
+\subsection{Các thực thể}
 
-\subsection{Mô hình theo dõi kết quả}
+\subsubsection{Product}
 
-\subsection{Mô hình phân bố dữ liệu}
+\subsubsection{Layer}
+
+\subsubsection{Experiment}
+
+\subsubsection{Test Group}
+
+\subsection{Mối quan hệ giữa các thực thể}
+
+\subsection{Trình tạo ID}
