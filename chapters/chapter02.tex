@@ -171,7 +171,7 @@ Mỗi thực thể có chức năng riêng biệt nhau.
 
 Biểu đồ tuần tự chung biểu thị việc khởi tạo và sử dụng A/B Test.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width = 1\textwidth]{overview-sequence}
 	\caption{Biểu đồ tuần tự chung}
@@ -181,7 +181,7 @@ Biểu đồ tuần tự chung biểu thị việc khởi tạo và sử dụng 
 
 Biểu đồ tuần tự khởi tạo A/B Test biểu thị
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width = 1\textwidth]{abtest-sequence}
 	\caption{Biểu đồ tuần tự khởi tạo A/B Test}
@@ -189,16 +189,169 @@ Biểu đồ tuần tự khởi tạo A/B Test biểu thị
 
 \section{Mô hình cơ sở dữ liệu}
 
+Mô hình cơ sở dữ liệu của hệ thống mô tả cụ thể các đặc tính của mỗi thực thể, ngoài ra mô tả
+cách lưu trữ các thực thể và các mối quan hệ tương quan trong cơ sở dữ liệu.
+
 \subsection{Các thực thể}
+
+Các thực thể bao gồm: Product, Layer, Experiment và Test Group.
 
 \subsubsection{Product}
 
+Product là thực thể lớn nhất, chỉ có chức năng phân tách theo nhu cầu sử dụng nên chỉ có 2 trường như sau:
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Trường & Loại   & Chú thích       \\ \hline
+		id     & int    & Unique id       \\ \hline
+		name   & string & Tên của Product \\ \hline
+	\end{tabular}
+	\caption{Mô hình của Product}
+\end{table}
+
+Cấu hình khi được lưu xuống cơ sở dữ liệu:
+
+\begin{itemize}
+	\bfitem{Key}{product::[id]}
+	\bfitem{Value}{binary (nén bởi protobuf)}
+	\bfitem{Command}{SET, GET}
+\end{itemize}
+
 \subsubsection{Layer}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Trường & Loại   & Chú thích      \\ \hline
+		id     & int    & Unique id      \\ \hline
+		name   & string & Tên của Layer  \\ \hline
+		type   & int    & Loại của Layer \\ \hline
+	\end{tabular}
+	\caption{Mô hình của Layer}
+\end{table}
+
+Cấu hình khi được lưu xuống cơ sở dữ liệu:
+
+\begin{itemize}
+	\bfitem{Key}{layer::[id]}
+	\bfitem{Value}{binary (nén bởi protobuf)}
+	\bfitem{Command}{SET, GET}
+\end{itemize}
 
 \subsubsection{Experiment}
 
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Trường      & Loại   & Chú thích          \\ \hline
+		id          & int    & Unique id          \\ \hline
+		name        & string & Tên của Experiment \\ \hline
+		traffic     & int    & Số lượng traffic   \\ \hline
+		start\_time & int    & Thời điểm bắt đầu  \\ \hline
+		end\_time   & int    & Thời điểm kết thúc \\ \hline
+		status      & int    & Trạng thái         \\ \hline
+	\end{tabular}
+	\caption{Mô hình của Experiment}
+\end{table}
+
+Cấu hình khi được lưu xuống cơ sở dữ liệu:
+
+\begin{itemize}
+	\bfitem{Key}{exp::[id]}
+	\bfitem{Value}{binary (nén bởi protobuf)}
+	\bfitem{Command}{SET, GET}
+\end{itemize}
+
 \subsubsection{Test Group}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		Trường    & Loại   & Chú thích                \\ \hline
+		id        & int    & Unique id                \\ \hline
+		parameter & string & Parameter của Test Group \\ \hline
+		value     & string & Value của Parameter      \\ \hline
+	\end{tabular}
+	\caption{Mô hình của Test Group}
+\end{table}
+
+Cấu hình khi được lưu xuống cơ sở dữ liệu:
+
+\begin{itemize}
+	\bfitem{Key}{group::[id]}
+	\bfitem{Value}{binary (nén bởi protobuf)}
+	\bfitem{Command}{SET, GET}
+\end{itemize}
 
 \subsection{Mối quan hệ giữa các thực thể}
 
-\subsection{Trình tạo ID}
+Giữa các thực thể có các mối quan hệ lẫn nhau, vì vậy ngoài việc lưu trữ các thực thể dưới
+cơ sở dữ liệu, cũng cần lưu trữ mối quan hệ giữa chúng.
+
+\subsubsection{Tổng hợp các Product}
+
+Khi cần query tất cả các Product hiện có, chỉ cần lưu các id của product vào một chỗ.
+
+Cấu hình khi được lưu xuống cơ sở dữ liệu:
+
+\begin{itemize}
+	\bfitem{Key}{product::ids}
+	\bfitem{Value}{các id của product}
+	\bfitem{Command}{SADD, SMEMBERS}
+\end{itemize}
+
+\subsubsection{Giữa Product và Layer}
+
+Mỗi Product có nhiều Layer, khi cần query tất cả các Layer dưới một Product, chỉ cần lưu
+các id của layer vào một chỗ.
+
+Cấu hình khi được lưu xuống cơ sở dữ liệu:
+
+\begin{itemize}
+	\bfitem{Key}{product::[id]::layers}
+	\bfitem{Value}{các id của Layer}
+	\bfitem{Command}{SADD, SMEMBERS}
+\end{itemize}
+
+\subsubsection{Giữa Layer và Experiment}
+
+Mỗi Layer có nhiều Experiment, khi cần query tất cả các Experiment dưới một Layer, chỉ cần lưu
+các id của Experiment vào một chỗ.
+
+Cấu hình khi được lưu xuống cơ sở dữ liệu:
+
+\begin{itemize}
+	\bfitem{Key}{layer::[id]::exps}
+	\bfitem{Value}{các id của Experiment}
+	\bfitem{Command}{SADD, SMEMBERS}
+\end{itemize}
+
+\subsubsection{Giữa Experiment và Test Group}
+
+Mỗi Experiment có nhiều Test Group, khi cần query tất cả các Test Group dưới một Experiment, chỉ cần lưu
+các id của Test Group vào một chỗ.
+
+Cấu hình khi được lưu xuống cơ sở dữ liệu:
+
+\begin{itemize}
+	\bfitem{Key}{exp::[id]::groups}
+	\bfitem{Value}{các id của Test Group}
+	\bfitem{Command}{SADD, SMEMBERS}
+\end{itemize}
+
+\subsection{Id generator}
+
+Mỗi thực thể đều yêu cầu một mã ID định danh, do đó cơ sở dữ liệu cũng cần được sử dụng để mỗi
+khi tạo một thực thể mới có thể có một mã ID định danh mới.
+
+Cấu hình khi được lưu xuống cơ sở dữ liệu:
+
+\begin{itemize}
+	\bfitem{Key}{product::id, layer::id, exp::id, group::id}
+	\bfitem{Value}{Mã ID đang sử dụng hiện tại}
+	\bfitem{Command}{INCR}
+\end{itemize}
