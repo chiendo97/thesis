@@ -2,8 +2,125 @@
 
 \section{Ứng dụng Domain Driven Design}
 
-\section{Triển khai chi tiết use case}
+\section{Triển khai chi tiết Use case}
+
+\subsection{Use case khởi tạo A/B Test}
+
+\subsubsection{Bước 1: Xác định ngữ cảnh}
+
+\begin{itemize}
+	\item Phía frontend gồm có: page để hiển thị và khởi tạo các thực thể
+	\item Phía backend gồm có: Service, Storage, Database
+\end{itemize}
+
+\subsubsection{Bước 2: Xác định các trường dữ liệu}
+
+\begin{itemize}
+	\item Product: tên product
+	\item Layer: tên layer, loại của layer
+	\item Experiment: tên experiment, số lượng traffic, ngày bắt đầu và ngày kết thúc
+	\item Test Group: tên của parameter, giá trị của parameter
+\end{itemize}
+
+\subsubsection{Bước 3: Xử lý nghiệp vụ}
+
+\begin{itemize}
+	\item Nhập dữ liệu trên website
+	\item Frontend gọi API của Service
+	\item Service gọi hàm tạo thực thể của Storage
+	\item Storage gọi hàm tạo thực thể của Database
+	\item Database thực hiện khởi tạo dữ liệu trên Cơ sở dữ liệu
+	\item Cơ sở dữ liệu thực hiện thành công và gửi trả dữ liệu cho Database
+	\item Database gửi trả dữ liệu cho Storage
+	\item Storage gửi trả dữ liệu cho Service
+	\item Service gửi trả dữ liệu cho Frontend
+	\item Frontend thông báo thành công cho người dùng
+\end{itemize}
+
+\subsection{Use case sử dụng A/B Test}
+
+\subsubsection{Bước 1: Xác định ngữ cảnh}
+
+\begin{itemize}
+	\item Phía frontend gồm có: page để hiển thị và khởi tạo các thực thể
+	\item Phía backend gồm có: Service, Storage, Database
+\end{itemize}
+
+\subsubsection{Bước 2: Xác định các trường dữ liệu}
+
+\begin{itemize}
+	\item Product: Id của product
+	\item UserID: Id của người dùng
+	\item SessionID: session của request
+\end{itemize}
+
+\subsubsection{Bước 3: Xử lý nghiệp vụ}
+
+\begin{itemize}
+	\item Từ phía người dùng, thực hiện một request bất kỳ đến abtest API của Service
+	\item Service gọi hàm tạo thực hiện abtest của Storage
+	\item Storage gọi truy xuất thông tin của Product từ Database
+	\item Database thực hiện truy xuất những dữ liệu cần trên Cơ sở dữ liệu
+	\item Cơ sở dữ liệu thực hiện thành công và gửi trả dữ liệu cho Database
+	\item Database gửi trả dữ liệu cho Storage
+	\item Storage thực hiện abtest dựa trên những dữ liệu đang có và trả về cho Service
+	\item Service gửi trả dữ liệu cho người dùng
+\end{itemize}
 
 \section{Triển khai kiểm thử thích hợp}
+
+Việc kiểm thử phần mềm là quan trọng vì những lý do sau:
+
+\begin{itemize}
+	\item Kiểm thử chỉ ra sai sót của sản phẩm trong giai đoạn phát triển, đồng thời đảm bảo chất lượng sản phẩm trong tương lai.
+	\item Kiểm thử đảm bảo kết quả cuối cùng đáp ứng các yêu cầu kinh doanh và người sử dụng.
+\end{itemize}
+
+Unit testing và integration testing:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|p{8cm}|p{8cm}|}
+		\hline
+		\textbf{Unit testing}                                                                                                                                     & \textbf{Integration testing}                                                                                                                 \\ \hline
+		Kiểm thử đơn vị là để kiểm tra từng phần của module riêng lẻ và quan sát rằng các bộ phận riêng lẻ đang hoạt động như mong đợi.                           & Kiểm thử tích hợp là tích hợp tất cả các module vào ứng dụng và kiểm tra chúng như một nhóm để xem chúng có hoạt động như mong đợi hay không \\ \hline
+		Kiểm thử đơn vị còn được gọi là kiểm thử hộp trắng vì nó đòi hỏi kiến thức về mã code và luồng điều khiển trong chương trình.                             & Kiểm thử tích hợp còn được gọi là kiểm thử hộp đen, chúng ta không động đến mã code mà chỉ tập trung vào đầu vào đã cho và đầu ra mong đợi.  \\ \hline
+		Unit testing có thể được thực hiện bất cứ lúc nào nhưng luôn luôn thực hiện trước khi kiểm thử tích hợp.                                                  & Integration Testing được thực hiện sau khi kiểm thử đơn vị nhưng trước khi kiểm thử hệ thống.                                                \\ \hline
+		Unit Testing chỉ kiểm tra chức năng của các module ở cấp độ đơn vị và không thể bắt được các lỗi mức tích hợp hoặc bất kỳ vấn đề nào trong toàn hệ thống. & Các lỗi trong kiểm thử tích hợp được phát hiện sau khi các module được tích hợp để xây dựng hệ thống tổng thể.                               \\ \hline
+		Chủ yếu tập trung vào chức năng của một module riêng lẻ.                                                                                                  & Chủ yếu tập trung vào tích hợp các module.                                                                                                   \\ \hline
+		Unit Testing thường được thực hiện bởi các developers.                                                                                                    & Integration Testing được thực hiện bởi người kiểm thử(Tester).                                                                               \\ \hline
+		Lỗi phát hiện thường đơn giản khi thử nghiệm đơn vị.                                                                                                      & Lỗi phát hiện thường khó khăn khi thử nghiệm tích hợp.                                                                                       \\ \hline
+		Chi phí bảo trì kiểm thử đơn vị là rất ít vì nó được duy trì và mức đơn vị.                                                                               & Kiểm thử tích hợp bảo trì là khá tốn kém vì nó đòi hỏi phải thiết lập môi trường riêng biệt.                                                 \\ \hline
+		Kiểm thử đơn vị không xác minh xem mã code có hoạt động như mong đợi với các phụ thuộc bên ngoài hay không.                                               & Kiểm thử tích hợp giúp xác minh rằng mã code hoạt động như mong đợi với các phụ thuộc bên ngoài.                                             \\ \hline
+	\end{tabular}
+\end{table}
+
+Quy trình kiểm thử gồm 5 bước triển khai: Khởi tạo môi trường, chuẩn bị dữ liệu người dùng, gọi API, kiểm tra dữ liệu trả về, xóa môi trường.
+
+\subsection{Mô tả Integration test với một service cụ thể}
+
+Sau đây sẽ thực hiện thử nghiệm với việc khởi tạo một A/B Test.
+
+\begin{itemize}
+	\item Chuẩn bị môi trường
+	\item Xác định danh sách các API cần test
+	      \begin{itemize}
+		      \item Khởi tạo Product mới
+		      \item Khởi tạo Layer mới
+		      \item Khởi tạo Experiment mới
+		      \item Khởi tạo Test Group mới
+	      \end{itemize}
+	\item Chuẩn bị các testcase bao gồm:
+	      \begin{itemize}
+		      \item API cần test
+		      \item Dữ liệu đầu vào
+		      \item Dữ liệu đầu ra mong muốn
+		      \item Kết quả test
+	      \end{itemize}
+\end{itemize}
+
+Viết code cho từng ca kiểm thử theo tập ca kiểm thử được chuẩn bị. Bảng ca kiểm thử được trình bày file ngoài.
+
+Xóa trắng cơ sở dữ liệu sau mỗi vòng test.
 
 \section{Thực nghiệm}

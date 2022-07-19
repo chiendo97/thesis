@@ -129,8 +129,21 @@ Hệ thống backend gồm các thành phần sau: Service, Storage, Database, T
 
 \begin{itemize}
 	\bfitem{Service}{Là thành phần xử lý hệ thống HTTP, chuyên nhận và phản hồi các truy cập từ hệ thống Frontend}
+	\begin{itemize}
+		\bfitem{Summary}{Gửi trả toàn bộ dữ liệu của các A/B Test}
+		\bfitem{Abtest}{Thực hiện và gửi trả A/B Test}
+		\bfitem{Entity}{Thực hiện khởi tạo hoặc cập nhật các thực thể, gửi trả kết quả}
+	\end{itemize}
 	\bfitem{Storage}{Là thành phần xử lý hệ thống tổng hợp thông tin cho hệ thống Backend}
+	\begin{itemize}
+		\bfitem{Summary}{Tổng hợp toàn bộ dữ liệu của các A/B Test}
+		\bfitem{Abtest}{Thực hiện A/B Test}
+		\bfitem{Entity}{Khởi tạo hoặc cập nhật các thực thể}
+	\end{itemize}
 	\bfitem{Database}{Là thành phần xử lý hệ thống quản lý dữ liệu cho hệ thống Backend}
+	\begin{itemize}
+		\bfitem{Entity}{Khởi tạo hoặc cập nhật các thực thể}
+	\end{itemize}
 	\bfitem{Types}{Tổng hợp các thực thể ở tầng Backend, bao gồm 2 loại là: Thực thể gốc và nội dung khi nhận/gửi API}
 \end{itemize}
 
@@ -207,7 +220,7 @@ Product là thực thể lớn nhất, chỉ có chức năng phân tách theo n
 		id     & int    & Unique id       \\ \hline
 		name   & string & Tên của Product \\ \hline
 	\end{tabular}
-	\caption{Mô hình của Product}
+	\caption{Thuộc tính của Product}
 \end{table}
 
 Cấu hình khi được lưu xuống cơ sở dữ liệu:
@@ -229,7 +242,7 @@ Cấu hình khi được lưu xuống cơ sở dữ liệu:
 		name   & string & Tên của Layer  \\ \hline
 		type   & int    & Loại của Layer \\ \hline
 	\end{tabular}
-	\caption{Mô hình của Layer}
+	\caption{Thuộc tính của Layer}
 \end{table}
 
 Cấu hình khi được lưu xuống cơ sở dữ liệu:
@@ -254,7 +267,7 @@ Cấu hình khi được lưu xuống cơ sở dữ liệu:
 		end\_time   & int    & Thời điểm kết thúc \\ \hline
 		status      & int    & Trạng thái         \\ \hline
 	\end{tabular}
-	\caption{Mô hình của Experiment}
+	\caption{Thuộc tính của Experiment}
 \end{table}
 
 Cấu hình khi được lưu xuống cơ sở dữ liệu:
@@ -276,7 +289,7 @@ Cấu hình khi được lưu xuống cơ sở dữ liệu:
 		parameter & string & Parameter của Test Group \\ \hline
 		value     & string & Value của Parameter      \\ \hline
 	\end{tabular}
-	\caption{Mô hình của Test Group}
+	\caption{Thuộc tính của Test Group}
 \end{table}
 
 Cấu hình khi được lưu xuống cơ sở dữ liệu:
