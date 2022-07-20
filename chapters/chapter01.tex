@@ -2,7 +2,7 @@
 
 \section{A/B Test}
 
-A/B Test (còn được biết đến như là bucket test hay split-run test) là một phương pháp nghiên cứu trải nghiệm người dùng. Một A/B test bao gồm một thí nghiệm ngẫu nhiên gồm có hai biến thể, A và B. Nó bao gồm ứng dụng của kiểm định giả thuyết thống kê hoặc "kiểm định giả thuyết hai mẫu" như được sử dụng trong lĩnh vực thống kê. A/B test là một cách để so sánh hai phiên bản của một biến đơn lẻ, thường bằng cách kiểm tra phản ứng của đối tượng đối với biến thể A so với biến thể B và xác định xem biến thể nào trong hai biến thể hiệu quả hơn. Phiên bản hiệu quả hơn sẽ dùng để quảng cáo online. A/B Test có thể dùng để test mọi thứ. Từ một hình banner cho đến các trang web hoặc các mẫu quảng cáo, email, ...
+A/B Test (còn được biết đến như là bucket test hay split-run test) là một phương pháp nghiên cứu trải nghiệm người dùng. Một A/B Test bao gồm một thí nghiệm ngẫu nhiên gồm có hai biến thể, A và B. Nó bao gồm ứng dụng của kiểm định giả thuyết thống kê hoặc "kiểm định giả thuyết hai mẫu" như được sử dụng trong lĩnh vực thống kê. A/B Test là một cách để so sánh hai phiên bản của một biến đơn lẻ, thường bằng cách kiểm tra phản ứng của đối tượng đối với biến thể A so với biến thể B và xác định xem biến thể nào trong hai biến thể hiệu quả hơn. Phiên bản hiệu quả hơn sẽ dùng để quảng cáo online. A/B Test có thể dùng để test mọi thứ. Từ một hình banner cho đến các trang web hoặc các mẫu quảng cáo, email, ...
 
 \subsection{A/B Test là gì}
 
@@ -24,7 +24,7 @@ Một số người cho rằng A/B Test là sự thay đổi triết lý và chi
 
 Trong thử nghiệm A/B, bạn chụp một trang web hoặc màn hình ứng dụng và sửa đổi nó để tạo phiên bản thứ hai của cùng một trang. Thay đổi này có thể đơn giản như một dòng tiêu đề, một nút hoặc là một thiết kế lại hoàn toàn của trang. Sau đó, một nửa lưu lượng truy cập của bạn được hiển thị phiên bản gốc của trang (được gọi là điều khiển) và một nửa được hiển thị là phiên bản đã sửa đổi của trang (biến thể).
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[height = 0.5\textwidth]{ab-testing-optimizely-2}
 	\caption{A/B Test hoạt động như thế nào}
@@ -32,7 +32,7 @@ Trong thử nghiệm A/B, bạn chụp một trang web hoặc màn hình ứng d
 
 Khi khách truy cập được phục vụ hoặc kiểm soát hoặc biến thể, mức độ tương tác của họ với từng trải nghiệm được đo lường và thu thập trong một bảng điều khiển và phân tích thông qua một công cụ thống kê. Sau đó, bạn có thể xác định xem việc thay đổi trải nghiệm có tác động tích cực, tiêu cực hay trung tính đến hành vi của khách truy cập hay không.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[height = 0.5\textwidth]{control-variation-graph-3}
 	\caption{Biểu đồ so sánh kết quả các biến thể}
@@ -85,7 +85,7 @@ Sau đây là khung thử nghiệm A/B mà có thể sử dụng để bắt đ�
 	\bfitem {Phân tích kết quả}{Sau khi thử nghiệm của bạn hoàn tất, đã đến lúc phân tích kết quả. Phần mềm thử nghiệm A/B của bạn sẽ trình bày dữ liệu từ thử nghiệm và cho bạn thấy sự khác biệt giữa hai phiên bản trang của bạn hoạt động như thế nào và liệu có sự khác biệt có ý nghĩa thống kê hay không.}
 \end{itemize}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[height = 0.5\textwidth]{ab-testing-process-6}
 	\caption{Quy trình thử nghiệm A/B}
@@ -108,7 +108,7 @@ Tỷ lệ chuyển đổi tương tự như chỉ số doanh thu tăng lên vì 
 Lợi ích của việc sử dụng chuyển đổi làm phép đo là nó được tính ở quy mô nhỏ hơn: tìm kiếm. Do số lượng tìm kiếm dao động nhanh hơn số lượng chuyển đổi (khách hàng chuyển đổi ít thường xuyên hơn nhiều so với số lượng họ tìm kiếm), nên tỷ lệ tìm kiếm trên chuyển đổi có thể thay đổi nhanh chóng nếu khách hàng chuyển đổi thường xuyên hơn. Do đó, chuyển đổi có thể phát hiện các sửa đổi hệ thống dễ dàng hơn.
 
 Do đó, tỷ lệ chuyển đổi ít mang tính định hướng hơn so với doanh thu nhưng có thể được phát hiện nhanh chóng - tức là tỷ lệ này nhạy cảm hơn. Thuộc tính này thích hợp hơn cho thử nghiệm A/B vì nó đạt được mức ý nghĩa nhanh hơn. Điều đó nói rằng, chuyển đổi không phải là một hình thức đo lường hoàn hảo vì nó coi tất cả doanh số bán hàng là bình đẳng, không mang lại giá trị kinh doanh giống nhau do tăng doanh thu.
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[height = 0.5\textwidth]{conversions}
 	\caption{Conversions}
@@ -134,7 +134,7 @@ Bạn có thể sử dụng CTR để đánh giá những quảng cáo, danh sá
 
 Một A/B Test được chia làm thành nhiều tầng lớp.  Mỗi tầng lớp đều có ý nghĩa riêng và được chia ra để có thể phục vụ cho logic business phức tạp.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[height = 0.5\textwidth]{overview-ab-testing}
 	\caption{Tổng quan của một A/B Test}
@@ -146,7 +146,7 @@ Product là thực thể cao nhất trong một A/B Test. Mỗi product thườn
 
 Mỗi Product được chia ra để tách biệt các A/B Test giữa các team khác nhau. A/B Test thuộc hai Product khác nhau sẽ không liên quan gì đến nhau, không để so sánh được cùng với nhau.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width = 1\textwidth]{product}
 	\caption{Product}
@@ -170,7 +170,7 @@ Ngoài ra, với mỗi layer, có thể cài đặt layer này sử dụng một
 
 Khi một truy cập được thông qua, truy cập đó sẽ đi qua từng Layer. Với mỗi layer, nó sẽ sử dụng cơ số để quyết định xem layer này sẽ sử dụng A/B Test hay thí nghiệm nào.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width = 1\textwidth]{layer}
 	\caption{Layer}
@@ -184,7 +184,7 @@ Mỗi experiment sẽ thuộc một Layer và chiếm một tỉ lệ phần tr�
 
 Như vậy, với mỗi layer, khi một try cập đi đến, nó sẽ sử dụng không hoặc một experiment.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width = 1\textwidth]{experiment}
 	\caption{Experiment}
@@ -196,7 +196,7 @@ Test Group là thực thể nhỏ nhất trong một A/B Test. Test Group đại
 
 Khi thực hiện một Experiment, mỗi Test Group sẽ có một lượng truy cập giống nhau và kết quả sẽ được so sánh giữa hai Test Group. Ví dụ trong thuật toán A, hai biến thể X và Y sẽ có một biến thể mang lại kết quả tốt hơn khi so sánh với nhau.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width = 1\textwidth]{test-group}
 	\caption{Test Group}
@@ -206,7 +206,7 @@ Khi thực hiện một Experiment, mỗi Test Group sẽ có một lượng tru
 
 \subsection{Golang}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[height = 0.3\textwidth]{golang}
 	\caption{Golang}
@@ -232,7 +232,7 @@ Go là một ngôn ngữ lập trình đa năng với cú pháp đơn giản và
 %
 % Không có gì ngạc nhiên khi những người như Kubernetes, Docker và Heroku đang sử dụng cờ vây vì cloud-based programming là một trong những lý do chính khiến Go được thiết kế.
 %
-% \begin{figure}[ht]
+% \begin{figure}[H]
 % 	\centering
 % 	\includegraphics[height = 0.3\textwidth]{golang-history-timeline}
 % 	\caption{Lịch sử của Golang}
@@ -250,12 +250,12 @@ Go là một ngôn ngữ lập trình đa năng với cú pháp đơn giản và
 	\bfitem {Biên dịch nhanh}{Golang sẽ chỉ bao gồm các gói sẽ nhập trực tiếp trong mã.}
 	\bfitem {Garbage Collector}{Đó là một tính năng chính của Go. Go vượt trội trong việc cung cấp nhiều quyền kiểm soát đối với việc phân bổ bộ nhớ và đã giảm đáng kể độ trễ trong các phiên bản gần đây nhất của Garbage Collector.}
 	\bfitem {Concurrency tích hợp}{Go có tính năng concurrency được tích hợp sẵn. Sử dụng Go Routines và các kênh, bạn có thể xử lý đồng thời các tác vụ rất dễ dàng và hiệu quả.}
-	\begin{figure}[ht]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[height = 0.3\textwidth]{goroutines}
 		\caption{Goroutine}
 	\end{figure}
-	\begin{figure}[ht]
+	\begin{figure}[H]
 		\centering
 		\includegraphics[height = 0.3\textwidth]{channel}
 		\caption{Channel}
@@ -273,7 +273,7 @@ Go là một ngôn ngữ lập trình đa năng với cú pháp đơn giản và
 
 \subsection{React}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[height = 0.3\textwidth]{react}
 	\caption{React}
@@ -307,7 +307,7 @@ React cũng có thể render trên server bằng Node và compile ra các ứng 
 
 \textbf{Virtual DOM}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[height = 0.3\textwidth]{virtual-dom}
 	\caption{Virtual DOM}
@@ -319,7 +319,7 @@ Những Framework sử dụng Virtual-DOM như ReactJS khi Virtual-DOM thay đ�
 
 \subsection{Redis}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[height = 0.3\textwidth]{redis}
 	\caption{Redis}
@@ -333,7 +333,7 @@ Redis cung cấp thời gian phản hồi dưới mili giây, cho phép hàng tr
 
 \subsubsection{Tính năng của Redis}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width = 1\textwidth]{redis-features}
 	\caption{Tính năng của Redis}
@@ -347,7 +347,7 @@ Tất cả dữ liệu Redis nằm trong bộ nhớ, cho phép truy cập dữ l
 
 Không giống như các kho dữ liệu khóa-giá trị khác cung cấp cấu trúc dữ liệu hạn chế, Redis có rất nhiều cấu trúc dữ liệu để đáp ứng nhu cầu ứng dụng của bạn. Các kiểu dữ liệu của Redis bao gồm:
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width = 1\textwidth]{redis-data-structures}
 	\caption{Cấu trúc dữ liệu của Redis}
@@ -386,7 +386,7 @@ Redis là một dự án mã nguồn mở được hỗ trợ bởi một cộng
 
 \subsubsection{Ứng dụng của Redis}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width = 1\textwidth]{redis-use-cases}
 	\caption{Ứng dụng của Redis}
