@@ -173,9 +173,9 @@ Khi một truy cập được gọi tới, truy cập đó sẽ đi qua từng L
 
 \subsection{Experiment}
 
-Experiment là thực thể tiếp theo đứng dưới một layer. Một experiment chính là một thí nghiệm mà được tạo ra để thử nghiệm một mô hình tính toán mới. Ví dụ: thử nghiệm thuật toán A mới để tính toán giá cả, thử nghiệm giao dịch màu mới để tăng trải nghiệm người dùng, v.v.
+Experiment là thực thể tiếp theo đứng dưới một layer, mỗi experiment chỉ thuộc một layer. Một experiment chính là một thí nghiệm mà được tạo ra để thử nghiệm một mô hình tính toán mới. Ví dụ: thử nghiệm thuật toán A mới để tính toán giá cả, thử nghiệm giao dịch màu mới để tăng trải nghiệm người dùng, v.v.
 
-Mỗi experiment sẽ thuộc một Layer và chiếm một tỉ lệ phần trăm truy cập của layer đó. Một layer có thể có nhiều experiment. Ví dụ: layer tính toán giá cả sẽ có hai thí nghiệm thử nghiệm hai thuật toán A và B, mỗi thuật toán có 10\% lượng truy cập để đánh giá.
+Mỗi experiment sẽ quản lý trạng thái, thời gian bắt đầu và thời gian kết thúc của experiment đó. Ngoài ra, mỗi experiment sẽ chiếm một tỉ lệ phần trăm truy cập của một layer. Một layer có thể có nhiều experiment. Ví dụ: layer tính toán giá cả sẽ có hai thí nghiệm thử nghiệm hai thuật toán A và B, mỗi thuật toán có 10\% lượng truy cập để đánh giá.
 
 Như vậy, với mỗi layer, khi một truy cập đi đến, nó sẽ sử dụng không hoặc một experiment bất kỳ dựa trên cơ số của layer đó. Mỗi truy cập đều có user\_id và request\_id đi kèm, layer sẽ sử dụng hai cơ số đó để quyết định Experiment nào sẽ được thực hiện.
 
@@ -218,22 +218,23 @@ Go là một ngôn ngữ lập trình đa năng với cú pháp đơn giản và
 	\bfitem {Liên kết tĩnh}{Trình biên dịch hỗ trợ liên kết tĩnh có nghĩa là bạn có thể liên kết tĩnh dự án của mình thành một tệp nhị phân lớn và sau đó chỉ cần triển khai nó lên máy chủ.}
 	\bfitem {Ngôn ngữ Strong và Statically Type}{Strong có nghĩa là sau khi bạn tạo một số biến bằng cách sử dụng một số kiểu dữ liệu thì đối với toàn bộ ứng dụng, nó sẽ vẫn là kiểu dữ liệu đấy. Statically Type là tất cả các biến phải xác định tại thời điểm biên dịch.}
 	\bfitem {Concurrency tích hợp}{Go có tính năng concurrency được tích hợp sẵn. Sử dụng Go Routines và các kênh, bạn có thể xử lý đồng thời các tác vụ rất dễ dàng và hiệu quả.}
-	\begin{figure}[H]
-		\centering
-		\includegraphics[height = 0.3\textwidth]{goroutines}
-		\caption{Goroutine}
-	\end{figure}
-	\begin{figure}[H]
-		\centering
-		\includegraphics[height = 0.3\textwidth]{channel}
-		\caption{Channel}
-	\end{figure}
 \end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height = 0.3\textwidth]{goroutines}
+    \caption{Goroutine}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[height = 0.3\textwidth]{channel}
+    \caption{Channel}
+\end{figure}
 
 \subsubsection{Ứng dụng của Golang}
 
 \begin{itemize}
-	\bfitem{Dịch vụ đám mây \& mạng}{Go giúp các doanh nghiệp xây dựng và mở rộng quy mô hệ thống điện toán đám mây. Khi các ứng dụng và quá trình xử lý chuyển sang đám mây, đồng thời trở thành một vấn đề rất lớn. Về bản chất, các hệ thống điện toán đám mây chia sẻ và mở rộng quy mô tài nguyên. Điều phối quyền truy cập vào các tài nguyên được chia sẻ là một vấn đề ảnh hưởng đến mọi quá trình xử lý ứng dụng trên đám mây và yêu cầu ngôn ngữ lập trình “hướng đến phát triển các ứng dụng đồng thời có độ tin cậy cao”.}
+	\bfitem{Dịch vụ đám mây}{Go giúp các doanh nghiệp xây dựng và mở rộng quy mô hệ thống điện toán đám mây. Khi các ứng dụng và quá trình xử lý chuyển sang đám mây, đồng thời trở thành một vấn đề rất lớn. Về bản chất, các hệ thống điện toán đám mây chia sẻ và mở rộng quy mô tài nguyên. Điều phối quyền truy cập vào các tài nguyên được chia sẻ là một vấn đề ảnh hưởng đến mọi quá trình xử lý ứng dụng trên đám mây và yêu cầu ngôn ngữ lập trình “hướng đến phát triển các ứng dụng đồng thời có độ tin cậy cao”.}
 	\bfitem {Command-line Interfaces (CLIs)}{Giao diện dòng lệnh (CLI), không giống như giao diện người dùng đồ họa (GUI), chỉ ở dạng văn bản. Các ứng dụng cơ sở hạ tầng và đám mây chủ yếu dựa trên CLI do khả năng tự động hóa và điều khiển từ xa dễ dàng.}
 	\bfitem {Web Development}{Go được thiết kế để cho phép các nhà phát triển nhanh chóng phát triển các ứng dụng web có khả năng mở rộng và bảo mật. Go đi kèm với một máy chủ web dễ sử dụng, an toàn và hiệu quả và bao gồm thư viện tạo khuôn mẫu web riêng. Go có hỗ trợ tuyệt vời cho tất cả các công nghệ mới nhất từ HTTP / 2, cơ sở dữ liệu như MySQL, MongoDB và ElasticSearch, cho đến các tiêu chuẩn mã hóa mới nhất bao gồm TLS 1.3. Các ứng dụng web của Go chạy nguyên bản trên Google App Engine và Google Cloud Run (để dễ dàng mở rộng quy mô) hoặc trên bất kỳ môi trường, đám mây hoặc hệ điều hành nào nhờ tính di động cực cao của Go.}
 	\bfitem {Development Operations \& Site Reliability Engineering}{Thời gian khởi động và xây dựng nhanh. Thư viện tiêu chuẩn mở rộng của Go — bao gồm các gói cho các nhu cầu thông thường như HTTP, I / O tệp, thời gian, biểu thức chính quy, thực thi và các định dạng JSON / CSV — cho phép DevOps / SRE đi đúng vào logic kinh doanh của họ. Ngoài ra, hệ thống kiểu tĩnh và xử lý lỗi rõ ràng của Go giúp các tập lệnh nhỏ thậm chí còn mạnh mẽ hơn.}
@@ -282,8 +283,6 @@ React cũng có thể render trên server bằng Node và compile ra các ứng 
 \end{figure}
 
 Những Framework sử dụng Virtual-DOM như ReactJS khi Virtual-DOM thay đổi, chúng ta không cần thao tác trực tiếp với DOM trên View mà vẫn phản ánh được sự thay đổi đó. Do Virtual-DOM vừa đóng vai trò là Model, vừa đóng vai trò là View nên mọi sự thay đổi trên Model đã kéo theo sự thay đổi trên View và ngược lại. Có nghĩa là mặc dù chúng ta không tác động trực tiếp vào các phần tử DOM ở View nhưng vẫn thực hiện được cơ chế Data-binding. Điều này làm cho tốc độ ứng dụng tăng lên đáng kể – môt lợi thế không thể tuyệt vời hơn khi sử dụng Virtula-DOM.
-
-\subsubsection{Ứng dụng của React}
 
 \subsection{Redis}
 
