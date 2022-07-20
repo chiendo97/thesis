@@ -42,38 +42,38 @@ Lớp Dịch vụ giữ các giao diện với các hoạt động phổ biến,
 
 Đây là lớp ngoài cùng và giữ các mối quan tâm ngoại vi như giao diện người dùng và các thử nghiệm. Đối với một ứng dụng Web, nó đại diện cho dự án Web API hoặc Unit Test. Lớp này có sự triển khai của nguyên tắc tiêm phụ thuộc để ứng dụng xây dựng một cấu trúc liên kết lỏng và có thể giao tiếp với lớp bên trong thông qua các giao diện.
 
-\subsection{Kiến trúc mô-đun}
+\subsection{Kiến trúc Modular}
 
-Kiến trúc mô-đun (Modular Architecture) là kiểu kiến trúc phần mềm cho phép quản lý sự phức tạp của một vấn đề bằng cách chia nhỏ chúng thành các mô-đun để dễ quản lý hơn với các nguyên tắc và mô hình. Mô-đun là một đơn vị phần mềm không trạng thái có thể triển khai, quản lý, tái sử dụng, kết hợp lại và cung cấp giao diện ngắn gọn cho người dùng.
+Kiến trúc Modular là kiểu kiến trúc phần mềm cho phép quản lý sự phức tạp của một vấn đề bằng cách chia nhỏ chúng thành các Modular để dễ quản lý hơn với các nguyên tắc và mô hình. Modular là một đơn vị phần mềm không trạng thái có thể triển khai, quản lý, tái sử dụng, kết hợp lại và cung cấp giao diện ngắn gọn cho người dùng.
 
 Khi phát triển phần mềm, khi hệ thống càng lớn thì càng cần thêm nhiều component, dẫn tới sự thay đổi nhỏ trong một component có thể ảnh hưởng tới nhiều component khác. Trong hệ thống, module là những component được phát triển bên ngoài ứng dụng. Module giao tiếp với ứng dụng thông qua entry-point.
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width = 1\textwidth]{modules}
-	\caption{Kiến trúc mô-đun}
+	\caption{Kiến trúc Modular}
 \end{figure}
 
-Sử dụng kiến trúc mô-đun đem lại một số lợi ích:
+Sử dụng kiến trúc Modular đem lại một số lợi ích:
 
 \begin{itemize}
-	\bfitem{Tùy chỉnh}{ứng dụng có thể hoạt động thực sự khác biệt bằng cách chỉ bật / tắt một số mô-đun.}
-	\bfitem{Ít phụ thuộc hơn}{các mô-đun độc lập hơn với chính ứng dụng, cho đến khi các "điểm vào" tương thích, cả mô-đun và ứng dụng có thể phát triển độc lập.}
-	\bfitem{Các phần mở rộng của bên thứ ba}{vì các mô-đun không phải là một phần của ứng dụng và các "điểm vào" được xác định rõ, việc phát triển các mô-đun có thể được thực hiện bởi các bên thứ ba.}
-	\bfitem{Phát triển độc lập}{Vì ứng dụng và các mô-đun là độc lập, chúng có thể là:}
+	\bfitem{Tùy chỉnh}{ứng dụng có thể hoạt động thực sự khác biệt bằng cách chỉ bật / tắt một số Modular.}
+	\bfitem{Ít phụ thuộc hơn}{các Modular độc lập hơn với chính ứng dụng, cho đến khi các "điểm vào" tương thích, cả Modular và ứng dụng có thể phát triển độc lập.}
+	\bfitem{Các phần mở rộng của bên thứ ba}{vì các Modular không phải là một phần của ứng dụng và các "điểm vào" được xác định rõ, việc phát triển các Modular có thể được thực hiện bởi các bên thứ ba.}
+	\bfitem{Phát triển độc lập}{Vì ứng dụng và các Modular là độc lập, chúng có thể là:}
 	\begin{itemize}
 		\item được phát triển bởi các nhà phát triển bên ngoài
 		\item phát hành với các chu kỳ phát hành độc lập
 		\item được phát triển tiềm năng với các công nghệ khác nhau
 	\end{itemize}
-	\bfitem{Ứng dụng nhỏ hơn}{Các ứng dụng nhỏ hơn (nhiều chức năng có thể được thực hiện thông qua các mô-đun) và ứng dụng nhỏ hơn được dịch để có khả năng bảo trì tốt hơn.}
+	\bfitem{Ứng dụng nhỏ hơn}{Các ứng dụng nhỏ hơn (nhiều chức năng có thể được thực hiện thông qua các Modular) và ứng dụng nhỏ hơn được dịch để có khả năng bảo trì tốt hơn.}
 \end{itemize}
 
-Mô-đun được hình thành dựa trên việc nhóm những lớp có mức độ liên quan cao thành một mô-đun để có tính tương liên cao nhất. Có 2 loại tương liên:
+Modular được hình thành dựa trên việc nhóm những lớp có mức độ liên quan cao thành một Modular để có tính tương liên cao nhất. Có 2 loại tương liên:
 
 \begin{itemize}
-	\item Tương liên giao tiếp: có được khi 2 phần của mô-đun thao tác trên cùng dữ liệu.
-	\item Tương liên chức năng: có được khi mọi phần của mô-đun làm việc cùng nhau để thực hiện tác vụ định rõ.
+	\item Tương liên giao tiếp: có được khi 2 phần của Modular thao tác trên cùng dữ liệu.
+	\item Tương liên chức năng: có được khi mọi phần của Modular làm việc cùng nhau để thực hiện tác vụ định rõ.
 \end{itemize}
 
 \section{Kiến trúc tổng quan hệ thống}
@@ -153,7 +153,7 @@ Hệ thống backend gồm các thành phần sau: Service, Storage, Database, T
 	\caption{Hệ thống Backend}
 \end{figure}
 
-\subsubsection{Hệ thống đường dẫn}
+\subsubsection{Hệ thống API}
 
 Hệ thống đường dẫn bao gồm các thực thể sau: Summary, AbTest, Product, Layer, Experiment và Test Group.
 
@@ -356,7 +356,7 @@ Cấu hình khi được lưu xuống cơ sở dữ liệu:
 	\bfitem{Command}{SADD, SMEMBERS}
 \end{itemize}
 
-\subsection{Id generator}
+\subsection{Id Generator}
 
 Mỗi thực thể đều yêu cầu một mã ID định danh, do đó cơ sở dữ liệu cũng cần được sử dụng để mỗi
 khi tạo một thực thể mới có thể có một mã ID định danh mới.
