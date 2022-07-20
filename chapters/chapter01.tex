@@ -2,23 +2,19 @@
 
 \section{A/B Test}
 
-A/B Test (còn được biết đến như là bucket test hay split-run test) là một phương pháp nghiên cứu trải nghiệm người dùng. Một A/B Test bao gồm một thí nghiệm ngẫu nhiên gồm có hai biến thể, A và B. Nó bao gồm ứng dụng của kiểm định giả thuyết thống kê hoặc "kiểm định giả thuyết hai mẫu" như được sử dụng trong lĩnh vực thống kê. A/B Test là một cách để so sánh hai phiên bản của một biến đơn lẻ, thường bằng cách kiểm tra phản ứng của đối tượng đối với biến thể A so với biến thể B và xác định xem biến thể nào trong hai biến thể hiệu quả hơn. Phiên bản hiệu quả hơn sẽ dùng để quảng cáo online. A/B Test có thể dùng để test mọi thứ. Từ một hình banner cho đến các trang web hoặc các mẫu quảng cáo, email, ...
+A/B Testing (hay còn được gọi là split testing hay bucket testing) là một phương pháp để so sánh giữa 2 biến thể của một thuật toán hoặc ứng dụng nào đó, từ đó tìm ra được biến thể nào có hiệu quả tốt hơn.
 
 \subsection{A/B Test là gì}
 
-A/B Test chính là kỹ thuật chia đối tượng cần kiểm tra thành hai phiên bản A và B để đưa ra được phiên bản mà người dùng quan tâm hơn thông qua cách người dùng tương tác với mỗi phiên bản đó.
+A/B Test chính là kỹ thuật chia đối tượng cần kiểm tra thành hai phiên bản A và B để đưa ra được phiên bản mà hiệu quả hơn thông qua kết quả tổng hợp với mỗi phiên bản đó.
 
-A/B Test là cách viết tắt của một thử nghiệm ngẫu nhiên có đối chứng đơn giản, trong đó hai mẫu (A và B) của một biến vectơ duy nhất được so sánh. Các giá trị này tương tự nhau ngoại trừ một biến thể có thể ảnh hưởng đến hành vi của người dùng. A/B Test được coi là hình thức đơn giản nhất của thử nghiệm có đối chứng. Tuy nhiên, bằng cách thêm nhiều biến thể hơn vào thử nghiệm, độ phức tạp của nó sẽ tăng lên.
+A/B Test là cách viết tắt của một thử nghiệm ngẫu nhiên có đối chứng đơn giản, trong đó hai mẫu (A và B) của một biến vectơ duy nhất được so sánh. Các giá trị này tương tự nhau ngoại trừ một biến thể có thể ảnh hưởng đến hành vi của thuật toán. A/B Test được coi là hình thức đơn giản nhất của thử nghiệm có đối chứng. Tuy nhiên, bằng cách thêm nhiều biến thể hơn vào thử nghiệm, độ phức tạp của nó sẽ tăng lên.
 
 A/B Test hữu ích để hiểu mức độ tương tác của người dùng và mức độ hài lòng của các tính năng trực tuyến như một tính năng hoặc sản phẩm mới. Các trang web truyền thông xã hội lớn như LinkedIn, Facebook và Instagram sử dụng A/B Test để làm cho trải nghiệm người dùng thành công hơn và như một cách để hợp lý hóa dịch vụ của họ.
 
 Ngày nay, các A/B Test cũng đang được sử dụng để thực hiện các thử nghiệm phức tạp trên các chủ đề như hiệu ứng mạng khi người dùng ngoại tuyến, cách các dịch vụ trực tuyến ảnh hưởng đến hành động của người dùng và cách người dùng ảnh hưởng đến nhau. Nhiều ngành nghề sử dụng dữ liệu từ các bài kiểm tra A/B. Điều này bao gồm các kỹ sư dữ liệu, nhà tiếp thị, nhà thiết kế, kỹ sư phần mềm và doanh nhân. Nhiều vị trí dựa vào dữ liệu từ các A/B Test, vì chúng cho phép các công ty hiểu được sự tăng trưởng, tăng doanh thu và tối ưu hóa sự hài lòng của khách hàng.
 
-Phiên bản A có thể là phiên bản được sử dụng hiện tại (do đó tạo thành nhóm kiểm soát), trong khi phiên bản B được sửa đổi ở một số khía cạnh so với phiên bản A (do đó hình thành nhóm điều trị). Ví dụ: trên một trang web thương mại điện tử, phễu mua hàng thường là một ứng cử viên tốt cho A/B Test, vì ngay cả tỷ lệ rớt hàng giảm nhẹ cũng có thể thể hiện mức tăng đáng kể trong bán hàng. Những cải tiến đáng kể đôi khi có thể được nhìn thấy thông qua các yếu tố thử nghiệm như sao chép văn bản, bố cục, hình ảnh và màu sắc, nhưng không phải lúc nào cũng vậy. Trong các thử nghiệm này, người dùng chỉ thấy một trong hai phiên bản, vì mục đích là khám phá phiên bản nào trong hai phiên bản này thích hợp hơn.
-
-Thử nghiệm đa biến hoặc thử nghiệm đa thức tương tự như A/B Test, nhưng có thể thử nghiệm nhiều hơn hai phiên bản cùng một lúc hoặc sử dụng nhiều kiểm soát hơn. Các A/B Test đơn giản không hợp lệ cho các tình huống quan sát, bán thực nghiệm hoặc phi thực nghiệm khác - thường xảy ra với dữ liệu khảo sát, dữ liệu ngoại tuyến và các hiện tượng khác, phức tạp hơn.
-
-Một số người cho rằng A/B Test là sự thay đổi triết lý và chiến lược kinh doanh trong một số lĩnh vực nhất định, mặc dù cách tiếp cận giống hệt với thiết kế giữa các chủ thể, thường được sử dụng trong nhiều truyền thống nghiên cứu. A/B Test như một triết lý phát triển web đưa lĩnh vực này phù hợp với một phong trào rộng lớn hơn theo hướng thực hành dựa trên bằng chứng. Lợi ích của A/B Test được coi là nó có thể được thực hiện liên tục trên hầu hết mọi thứ, đặc biệt là vì hầu hết các phần mềm tự động hóa tiếp thị hiện nay thường đi kèm với khả năng chạy A/B Test liên tục.
+Phiên bản A có thể là phiên bản được sử dụng hiện tại (do đó tạo thành nhóm gốc), trong khi phiên bản B được sửa đổi ở một số khía cạnh so với phiên bản A (do đó hình thành nhóm thử nghiệm). Ví dụ: trên một trang web thương mại điện tử, phễu mua hàng thường là một ứng cử viên tốt cho A/B Test, vì ngay cả tỷ lệ rớt hàng giảm nhẹ cũng có thể thể hiện mức tăng đáng kể trong bán hàng. Những cải tiến đáng kể đôi khi có thể được nhìn thấy thông qua các yếu tố thử nghiệm như bố cục, hình ảnh và màu sắc, nhưng không phải lúc nào cũng vậy. Trong các thử nghiệm này, người dùng chỉ thấy một trong hai phiên bản, vì mục đích là khám phá phiên bản nào trong hai phiên bản này thích hợp hơn.
 
 \subsection{Cách A/B Test hoạt động}
 
@@ -50,7 +46,7 @@ Xu hướng marketing online hiện nay đều chú trọng đến A/B Test. Ch�
 
 Để tìm ra giao diện mà thu hút người sử dụng hơn thì chúng ta có thử nghiệm 2 phiên bản của giao diện đó, hai phiên bản sẽ khác nhau ở cách bố trí nội dung, vị trí đặt các button điều hướng, các hình ảnh, .....
 
-\subsubsection{Đối với Email marketing}
+\subsubsection{Đối với Email Marketing}
 
 Đã qua rồi cái thời mà đẩy hàng trăm ngàn email đi và nghĩ rằng người dùng sẽ đọc được những email của mình gửi. Các email clients ngày càng có các bộ lọc tinh xảo hơn, tống tất cả các spam email vào thùng rác. Điều quan trọng là làm thế nào để khách hàng chịu mở email của mình ra xem và tương tác với các email đó. Câu trả lời chính là A/B Test.
 
@@ -156,19 +152,18 @@ Ví dụ: trong phòng quảng cáo thì sẽ có hai bộ phận lớn là qu�
 
 \subsection{Layer}
 
-Layer là thực thể thức hai đứng sau thực thể Product. Một Product có thể có nhiều Layer. Mỗi Layer đại diện cho một logic nhỏ hơn của Product đấy. Mỗi layer sẽ có 100\% lượng truy cập.
+Layer là thực thể thức hai đứng sau thực thể Product. Mỗi Layer đại diện cho một logic nhỏ hơn của Product đấy. Một Product có thể có nhiều Layer.
 
-Ví dụ: trong mobile app có thể có 2 layer là layer giao diện cài đặt hay layer giao diện chơi game.
+Mỗi layer sẽ có tổng cộng 100\% lượng truy cập. Tầng sau sẽ sử dụng một lượng nhỏ truy cập trong 100\% lượng truy cập đấy.
 
 Ngoài ra, với mỗi layer, có thể cài đặt layer này sử dụng một cơ số để phân chia lượng truy cập. Các cơ số có thể là:
 
 \begin{itemize}
 	\bfitem {request\_id}{sử dụng request\_id để phân chia truy cập.}
 	\bfitem {user\_id}{sử dụng user\_id để phân chia truy cập.}
-	\bfitem {request\_id và user\_id}{sử dụng cả request\_id và user\_id để phân chia truy cập.}
 \end{itemize}
 
-Khi một truy cập được thông qua, truy cập đó sẽ đi qua từng Layer. Với mỗi layer, nó sẽ sử dụng cơ số để quyết định xem layer này sẽ sử dụng A/B Test hay thí nghiệm nào.
+Khi một truy cập được gọi tới, truy cập đó sẽ đi qua từng Layer. Với mỗi layer, nó sẽ sử dụng cơ số để quyết định xem layer này sẽ sử dụng thí nghiệm nào.
 
 \begin{figure}[H]
 	\centering
@@ -182,7 +177,7 @@ Experiment là thực thể tiếp theo đứng dưới một layer. Một exper
 
 Mỗi experiment sẽ thuộc một Layer và chiếm một tỉ lệ phần trăm truy cập của layer đó. Một layer có thể có nhiều experiment. Ví dụ: layer tính toán giá cả sẽ có hai thí nghiệm thử nghiệm hai thuật toán A và B, mỗi thuật toán có 10\% lượng truy cập để đánh giá.
 
-Như vậy, với mỗi layer, khi một try cập đi đến, nó sẽ sử dụng không hoặc một experiment.
+Như vậy, với mỗi layer, khi một truy cập đi đến, nó sẽ sử dụng không hoặc một experiment bất kỳ dựa trên cơ số của layer đó. Mỗi truy cập đều có user\_id và request\_id đi kèm, layer sẽ sử dụng hai cơ số đó để quyết định Experiment nào sẽ được thực hiện.
 
 \begin{figure}[H]
 	\centering
