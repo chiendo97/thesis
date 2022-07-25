@@ -304,6 +304,8 @@ Những Framework sử dụng Virtual-DOM như ReactJS khi Virtual-DOM thay đ�
 
 \subsection{Redis}
 
+Redis, viết tắt của Remote Dictionary Server, là một cơ sở dữ liệu theo dạng key-value và mã nguồn mở.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[height = 0.3\textwidth]{redis}
@@ -312,25 +314,33 @@ Những Framework sử dụng Virtual-DOM như ReactJS khi Virtual-DOM thay đ�
 
 \subsubsection{Redis là gì}
 
-Redis, viết tắt của Remote Dictionary Server, là một kho lưu trữ dữ liệu key-value, mã nguồn mở, in-memeory và nhanh chóng. Dự án bắt đầu khi Salvatore Sanfilippo, nhà phát triển ban đầu của Redis, muốn cải thiện khả năng mở rộng của công ty khởi nghiệp của mình. Từ đó, anh phát triển Redis, hiện được sử dụng làm cơ sở dữ liệu, bộ nhớ đệm, message broker và hàng đợi.
-
-Redis cung cấp thời gian phản hồi dưới mili giây, cho phép hàng triệu yêu cầu mỗi giây cho các ứng dụng thời gian thực trong các ngành như trò chơi, công nghệ quảng cáo, dịch vụ tài chính, chăm sóc sức khỏe và IoT. Ngày nay, Redis là một trong những engine mã nguồn mở phổ biến nhất hiện nay, được Stack Overflow đặt tên là cơ sở dữ liệu "Được yêu thích nhất" trong 5 năm liên tiếp. Do hiệu suất nhanh, Redis là một lựa chọn phổ biến cho bộ nhớ đệm, quản lý phiên, chơi trò chơi, bảng xếp hạng, phân tích thời gian thực, không gian địa lý, gọi xe, trò chuyện / nhắn tin, phát trực tuyến phương tiện và ứng dụng pub / sub.
+Redis có thời gian phản hồi dưới mili giây, cho phép hàng triệu yêu cầu mỗi giây cho các ứng dụng thời gian thực trong các ngành như trò chơi, công nghệ quảng cáo, dịch vụ tài chính, chăm sóc sức khỏe và IoT. Ngày nay, Redis là một trong những engine mã nguồn mở phổ biến nhất hiện nay, được Stack Overflow đặt tên là cơ sở dữ liệu "Được yêu thích nhất" trong 5 năm liên tiếp. Do hiệu suất nhanh, Redis là một lựa chọn phổ biến cho bộ nhớ đệm, quản lý phiên, chơi trò chơi, bảng xếp hạng, phân tích thời gian thực, không gian địa lý, gọi xe, trò chuyện / nhắn tin và phát trực tuyến phương tiện.
 
 \subsubsection{Tính năng của Redis}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width = 1\textwidth]{redis-features}
+	\includegraphics[width = 0.7\textwidth]{redis-features}
 	\caption{Tính năng của Redis}
 \end{figure}
 
 \textbf{Performance}
 
-Tất cả dữ liệu Redis nằm trong bộ nhớ, cho phép truy cập dữ liệu có độ trễ thấp và thông lượng cao. Không giống như cơ sở dữ liệu truyền thống, kho lưu trữ dữ liệu trong bộ nhớ không yêu cầu chuyển tới đĩa, giảm độ trễ của động cơ xuống micro giây. Do đó, các kho lưu trữ dữ liệu trong bộ nhớ có thể hỗ trợ nhiều thao tác hơn và thời gian phản hồi nhanh hơn. Kết quả là mang lại hiệu suất cực nhanh với các thao tác đọc và ghi trung bình chỉ mất chưa đến một phần nghìn giây và hỗ trợ hàng triệu thao tác mỗi giây.
+Tất cả dữ liệu Redis nằm trong bộ nhớ của máy tính, cho phép truy cập dữ liệu có độ trễ thấp và dung lượng cao. Không giống như cơ sở dữ liệu truyền thống, cơ sở dữ liệu trong bộ nhớ không yêu cầu chuyển tới đĩa, giảm độ trễ xuống còn micro giây. Do đó, các cơ sở dữ liệu trong bộ nhớ có thể hỗ trợ nhiều thao tác hơn và thời gian phản hồi nhanh hơn. Kết quả là mang lại hiệu suất cực nhanh với các thao tác đọc và ghi trung bình chỉ mất chưa đến một phần nghìn giây và hỗ trợ hàng triệu thao tác mỗi giây.
 
 \textbf{Cấu trúc dữ liệu linh hoạt}
 
-Không giống như các kho dữ liệu khóa-giá trị khác cung cấp cấu trúc dữ liệu hạn chế, Redis có rất nhiều cấu trúc dữ liệu để đáp ứng nhu cầu ứng dụng của bạn. Các kiểu dữ liệu của Redis bao gồm:
+Không giống như các kho dữ liệu khóa-giá trị khác cung cấp cấu trúc dữ liệu hạn chế, Redis có rất nhiều cấu trúc dữ liệu để đáp ứng nhu cầu ứng dụng của bạn. Các kiểu dữ liệu phổ biến của Redis bao gồm:
+
+\begin{itemize}
+	\bfitem{Strings}{dữ liệu văn bản hoặc dữ liệu nhị phân}
+	\bfitem{Lists}{tập hợp các chuỗi theo thứ tự thêm vào}
+	\bfitem{Sets}{tập hợp các chuỗi không có thứ tự, riêng biệt theo key}
+	\bfitem{Sorted Sets}{Các chuỗi được sắp xếp theo một giá trị}
+	\bfitem{Hashes}{một cấu trúc dữ liệu để lưu trữ danh sách các trường và giá trị}
+	\bfitem{Bitmap}{một kiểu dữ liệu cung cấp các hoạt động ở mức bit}
+	\bfitem{JSON}{một đối tượng lồng nhau, bán cấu trúc của các giá trị được đặt tên hỗ trợ số, chuỗi, Boolean, mảng và các đối tượng khác}
+\end{itemize}
 
 \begin{figure}[H]
 	\centering
@@ -338,44 +348,21 @@ Không giống như các kho dữ liệu khóa-giá trị khác cung cấp cấu
 	\caption{Cấu trúc dữ liệu của Redis}
 \end{figure}
 
-\begin{itemize}
-	\bfitem{Strings}{dữ liệu văn bản hoặc dữ liệu nhị phân có kích thước lên đến 512MB}
-	\bfitem{Lists}{tập hợp các Chuỗi theo thứ tự chúng được thêm vào}
-	\bfitem{Sets}{một tập hợp các chuỗi không có thứ tự với khả năng giao nhau, kết hợp và khác các loại Bộ khác}
-	\bfitem{Sorted Sets }{Các bộ được sắp xếp theo một giá trị}
-	\bfitem{Hashes}{một cấu trúc dữ liệu để lưu trữ danh sách các trường và giá trị}
-	\bfitem{Bitmap}{một kiểu dữ liệu cung cấp các hoạt động ở mức bit}
-	\bfitem{HyperLogLogs}{cấu trúc dữ liệu xác suất để ước tính các mục duy nhất trong tập dữ liệu}
-	\bfitem{Streams}{cấu trúc dữ liệu nhật ký Hàng đợi tin nhắn}
-	\bfitem{Geospatial}{mục nhập dựa trên kinh độ / vĩ độ Bản đồ, "lân cận"}
-	\bfitem{JSON}{một đối tượng lồng nhau, bán cấu trúc của các giá trị được đặt tên hỗ trợ số, chuỗi, Boolean, mảng và các đối tượng khác}
-\end{itemize}
-
 \textbf{Đơn giản và dễ sử dụng}
 
-Redis cho phép bạn viết mã phức tạp truyền thống với ít dòng hơn, đơn giản hơn. Với Redis, bạn viết ít dòng mã hơn để lưu trữ, truy cập và sử dụng dữ liệu trong các ứng dụng của mình. Sự khác biệt là các nhà phát triển sử dụng Redis có thể sử dụng cấu trúc lệnh đơn giản trái ngược với các ngôn ngữ truy vấn của cơ sở dữ liệu truyền thống. Ví dụ: bạn có thể sử dụng cấu trúc dữ liệu băm Redis để di chuyển dữ liệu đến kho dữ liệu chỉ với một dòng mã. Một tác vụ tương tự trên kho dữ liệu không có cấu trúc dữ liệu băm sẽ yêu cầu nhiều dòng mã để chuyển đổi từ định dạng này sang định dạng khác. Redis đi kèm với cấu trúc dữ liệu gốc và nhiều tùy chọn để thao tác và tương tác với dữ liệu của bạn. Hơn một trăm ứng dụng khách mã nguồn mở có sẵn cho các nhà phát triển Redis. Các ngôn ngữ được hỗ trợ bao gồm Java, Python, PHP, C, C++, C\#, JavaScript, Node.js, Ruby, R, Go và nhiều ngôn ngữ khác.
+Redis cho phép bạn viết mã phức tạp truyền thống với ít dòng hơn, đơn giản hơn. Với Redis, bạn viết ít dòng mã hơn để lưu trữ, truy cập và sử dụng dữ liệu trong các ứng dụng của mình. Sự khác biệt là các nhà phát triển sử dụng Redis có thể sử dụng cấu trúc lệnh đơn giản trái ngược với các ngôn ngữ truy vấn của cơ sở dữ liệu truyền thống. Một tác vụ tương tự trên kho dữ liệu không có cấu trúc dữ liệu băm sẽ yêu cầu nhiều dòng mã để chuyển đổi từ định dạng này sang định dạng khác.
+
+Hơn một trăm ứng dụng khách mã nguồn mở có sẵn cho Redis. Các ngôn ngữ được hỗ trợ bao gồm Java, Python, PHP, C, C++, C\#, JavaScript, Node.js, Ruby, R, Go và nhiều ngôn ngữ khác.
 
 \textbf{Nhân rộng và bền bỉ}
 
 Redis sử dụng kiến trúc bản sao chính và hỗ trợ sao chép không đồng bộ, nơi dữ liệu có thể được sao chép sang nhiều máy chủ bản sao. Điều này cung cấp hiệu suất đọc được cải thiện (vì các yêu cầu có thể được phân chia giữa các máy chủ) và khôi phục nhanh hơn khi máy chủ chính gặp sự cố. Để bền bỉ, Redis hỗ trợ sao lưu theo thời gian (sao chép tập dữ liệu Redis vào đĩa).
 
-Redis không được xây dựng để trở thành một cơ sở dữ liệu bền và nhất quán. Nếu bạn cần một cơ sở dữ liệu bền, tương thích với Redis, hãy xem xét Amazon MemoryDB cho Redis. Bởi vì MemoryDB sử dụng nhật ký giao dịch lâu dài để lưu trữ dữ liệu trên nhiều Vùng khả dụng (AZ), bạn có thể sử dụng nó làm cơ sở dữ liệu chính của mình. MemoryDB được xây dựng có mục đích cho phép các nhà phát triển sử dụng API Redis mà không phải lo lắng về việc quản lý bộ nhớ cache, cơ sở dữ liệu riêng biệt hoặc cơ sở hạ tầng bên dưới.
-
 \textbf{Tính khả dụng và khả năng mở rộng cao}
 
 Redis cung cấp một kiến trúc bản sao chính trong một nút chính hoặc một cấu trúc liên kết nhóm. Điều này cho phép bạn xây dựng các giải pháp có tính khả dụng cao, cung cấp hiệu suất và độ tin cậy nhất quán. Khi bạn cần điều chỉnh kích thước cụm của mình, các tùy chọn khác nhau để mở rộng và mở rộng quy mô trong hoặc ngoài cũng có sẵn. Điều này cho phép cụm của bạn phát triển theo nhu cầu của bạn.
 
-\textbf{Mã nguồn mở}
-
-Redis là một dự án mã nguồn mở được hỗ trợ bởi một cộng đồng sôi động, bao gồm AWS. Không có nhà cung cấp hoặc công nghệ nào bị khóa vì Redis dựa trên các tiêu chuẩn mở, hỗ trợ các định dạng dữ liệu mở và có một tập hợp khách hàng phong phú.
-
 \subsubsection{Ứng dụng của Redis}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width = 1\textwidth]{redis-use-cases}
-	\caption{Ứng dụng của Redis}
-\end{figure}
 
 \textbf{Bộ nhớ đệm}
 
@@ -391,11 +378,11 @@ Redis là một lựa chọn phổ biến trong số các nhà phát triển tr�
 
 \textbf{Lưu trữ session}
 
-Redis như một kho lưu trữ dữ liệu trong bộ nhớ với tính khả dụng cao và bền bỉ là lựa chọn phổ biến của các nhà phát triển ứng dụng để lưu trữ và quản lý dữ liệu phiên cho các ứng dụng quy mô internet. Redis cung cấp độ trễ dưới mili giây, quy mô và khả năng phục hồi cần thiết để quản lý dữ liệu phiên, chẳng hạn như hồ sơ người dùng, thông tin đăng nhập, trạng thái phiên và cá nhân hóa người dùng cụ thể.
+Redis như một cơ sở dữ liệu trong bộ nhớ với tính khả dụng cao và bền bỉ là lựa chọn phổ biến của các nhà phát triển ứng dụng để lưu trữ và quản lý dữ liệu phiên cho các ứng dụng quy mô internet. Redis cung cấp độ trễ dưới mili giây, quy mô và khả năng phục hồi cần thiết để quản lý dữ liệu phiên, chẳng hạn như hồ sơ người dùng, thông tin đăng nhập, trạng thái phiên và cá nhân hóa người dùng cụ thể.
 
 \textbf{Phát trực tuyến đa phương tiện}
 
-Redis cung cấp một kho lưu trữ dữ liệu trong bộ nhớ, nhanh chóng để cung cấp năng lượng cho các trường hợp sử dụng phát trực tiếp. Redis có thể được sử dụng để lưu trữ siêu dữ liệu về hồ sơ của người dùng và lịch sử xem, thông tin xác thực / mã thông báo cho hàng triệu người dùng và tệp kê khai để cho phép CDN truyền video tới hàng triệu người dùng thiết bị di động và máy tính để bàn cùng một lúc.
+Redis cung cấp một cơ sở dữ liệu trong bộ nhớ, nhanh chóng để cung cấp năng lượng cho các trường hợp sử dụng phát trực tiếp. Redis có thể được sử dụng để lưu trữ siêu dữ liệu về hồ sơ của người dùng và lịch sử xem, thông tin xác thực / mã thông báo cho hàng triệu người dùng và tệp kê khai để cho phép CDN truyền video tới hàng triệu người dùng thiết bị di động và máy tính để bàn cùng một lúc.
 
 \textbf{Không gian địa lý}
 
@@ -403,10 +390,28 @@ Redis cung cấp các cấu trúc và toán tử dữ liệu trong bộ nhớ đ
 
 \textbf{Học máy}
 
-Các ứng dụng hướng dữ liệu hiện đại yêu cầu máy học để xử lý nhanh chóng một khối lượng lớn, sự đa dạng và tốc độ của dữ liệu cũng như tự động hóa việc ra quyết định. Đối với các trường hợp sử dụng như phát hiện gian lận trong trò chơi và dịch vụ tài chính, đặt giá thầu thời gian thực trong công nghệ quảng cáo và mai mối trong việc hẹn hò và chia sẻ chuyến đi, khả năng xử lý dữ liệu trực tiếp và đưa ra quyết định trong vòng hàng chục mili giây là vô cùng quan trọng. Redis cung cấp cho bạn một kho lưu trữ dữ liệu trong bộ nhớ nhanh chóng để xây dựng, đào tạo và triển khai các mô hình học máy một cách nhanh chóng.
+Các ứng dụng hướng dữ liệu hiện đại yêu cầu máy học để xử lý nhanh chóng một khối lượng lớn, sự đa dạng và tốc độ của dữ liệu cũng như tự động hóa việc ra quyết định. Đối với các trường hợp sử dụng như phát hiện gian lận trong trò chơi và dịch vụ tài chính, đặt giá thầu thời gian thực trong công nghệ quảng cáo và mai mối trong việc hẹn hò và chia sẻ chuyến đi, khả năng xử lý dữ liệu trực tiếp và đưa ra quyết định trong vòng hàng chục mili giây là vô cùng quan trọng. Redis cung cấp cho bạn một cơ sở dữ liệu trong bộ nhớ nhanh chóng để xây dựng, đào tạo và triển khai các mô hình học máy một cách nhanh chóng.
 
 \textbf{Phân tích thời gian thực}
 
-Redis có thể được sử dụng với các giải pháp phát trực tuyến như Apache Kafka và Amazon Kinesis như một kho lưu trữ dữ liệu trong bộ nhớ để nhập, xử lý và phân tích dữ liệu thời gian thực với độ trễ dưới mili giây. Redis là một lựa chọn lý tưởng cho các trường hợp sử dụng phân tích thời gian thực như phân tích phương tiện truyền thông xã hội, nhắm mục tiêu quảng cáo, cá nhân hóa và IoT.
+Redis có thể được sử dụng với các giải pháp phát trực tuyến như Apache Kafka và Amazon Kinesis như một cơ sở dữ liệu trong bộ nhớ để nhập, xử lý và phân tích dữ liệu thời gian thực với độ trễ dưới mili giây. Redis là một lựa chọn lý tưởng cho các trường hợp sử dụng phân tích thời gian thực như phân tích phương tiện truyền thông xã hội, nhắm mục tiêu quảng cáo, cá nhân hóa và IoT.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 1\textwidth]{redis-use-cases}
+	\caption{Ứng dụng của Redis}
+\end{figure}
+
+\subsubsection{Command phổ biến}
+
+Sau đây là một số command phổ biến được dùng trong Redis:
+
+\begin{itemize}
+\bfitem {GET}{Gán giá trị cho một trường}
+\bfitem {SET}{Lấy giá trị của một trường}
+\bfitem {SADD}{Thêm một giá trị vào một trường tổng hợp}
+\bfitem {SMEMBER}{Lấy toàn bộ giá trị trong một trường tổng hợp}
+\bfitem {INCR}{Tăng giá trị số học của một trường}
+\end{itemize}
 
 % \subsection{Test Driven Development (TDD)}
