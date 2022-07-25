@@ -128,7 +128,7 @@ Bạn có thể sử dụng CTR để đánh giá những quảng cáo, danh sá
 
 \section{Cấu trúc của A/B Test}
 
-Một A/B Test được chia làm thành nhiều tầng lớp. Mỗi tầng lớp đều có ý nghĩa riêng và được chia ra để có thể phục vụ cho logic business phức tạp.
+Một A/B Test được chia làm thành nhiều tầng lớp. Mỗi tầng lớp đều có ý nghĩa riêng và được chia ra để có thể phục vụ cho nghiệp vụ phức tạp.
 
 \begin{figure}[H]
 	\centering
@@ -187,7 +187,7 @@ Như vậy, với mỗi layer, khi một truy cập đi đến, nó sẽ sử d�
 
 \subsection{Test Group}
 
-Test Group là thực thể nhỏ nhất trong một A/B Test. Test Group đại diện cho một biến thể của một Experiment. Ví dụ khi sử dụng thuật toán A để tính toán giá cả của sản phẩm, thuật toán A có thể sử dụng hai chỉ số khác nhau để tính toán tương ứng với hai test group khác nhau.
+Test Group là thực thể nhỏ thứ hai trong một A/B Test. Test Group đại diện cho một biến thể của một Experiment. Ví dụ khi sử dụng thuật toán A để tính toán giá cả của sản phẩm, thuật toán A có thể sử dụng hai chỉ số khác nhau để tính toán tương ứng với hai test group khác nhau.
 
 Khi thực hiện một Experiment, mỗi Test Group sẽ có một lượng truy cập giống nhau và kết quả sẽ được so sánh giữa hai Test Group. Ví dụ trong thuật toán A, hai biến thể X và Y sẽ có một biến thể mang lại kết quả tốt hơn khi so sánh với nhau.
 
@@ -195,6 +195,24 @@ Khi thực hiện một Experiment, mỗi Test Group sẽ có một lượng tru
 	\centering
 	\includegraphics[width = 1\textwidth]{test-group}
 	\caption{Test Group}
+\end{figure}
+
+\subsection{Parameter}
+
+Parameter đại diện cho một dị điểm trong một Test Group của một Experiment.
+Trong một Test Group có thể có một hoặc nhiều Parameter, các parameter đấy đại diện cho đặc điểm biến thể
+của Test Group đấy.
+Mỗi paramater có hai trường dữ liệu là Name và Value.
+
+\begin{itemize}
+	\bfitem{Name}{là tên của Paramater}
+	\bfitem{Value}{là giá trị của Parameter}
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 1\textwidth]{parameter}
+	\caption{Parameter}
 \end{figure}
 
 \section{Công nghệ thực hiện}
