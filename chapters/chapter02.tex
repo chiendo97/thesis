@@ -76,6 +76,110 @@ Modular được hình thành dựa trên việc nhóm những lớp có mức �
 	\item Tương liên chức năng: có được khi mọi phần của Modular làm việc cùng nhau để thực hiện tác vụ định rõ.
 \end{itemize}
 
+\subsection{Domain Driven Design}
+
+Domain-Driven Design là một phương pháp hay cách thức tiếp cận trong việc phân tích và phát triển phần mềm trong khi giải quyết những vấn đề nghiệp vụ phức tạp. Ý tưởng cơ bản của cách thức này là việc xây dựng sự kết nối chặt chẽ giữa thiết kế phần mềm và mô hình nghiệp vụ trong suốt vòng đời phát triển sản phẩm. Để tạo nên sự kết nối này.
+
+Eric Evans, đã đưa ra khái niệm này vào năm 2004, trong cuốn sách Domain-Driven Design: Tackling Complexity in the Heart of Software. Theo cuốn sách, nó tập trung vào ba nguyên tắc:
+
+\begin{itemize}
+	\item Trọng tâm của dự án là những nguyên tắc và logic nghiệp vụ
+	\item Các thiết kế phức tạp dựa trên các mô hình nghiệp vụ.
+	\item Sự hợp tác giữa các chuyên gia kỹ thuật và miền là rất quan trọng để tạo ra một mô hình ứng dụng giải quyết các vấn đề cụ thể trong mô hình nghiệp vụ.
+\end{itemize}
+
+Khi các đoạn code liên quan đến nghiệp vụ được trộn lẫn giữa các tầng lại với nhau, nó trở nên vô cùng khó khăn cho việc đọc cũng như suy nghĩ về chúng. Các thay đổi ở giao diện người dùng cũng có thể thực sự thay đổi cả logic nghiệp vụ. Để thay đổi logic nghiệp vụ có thể yêu cầu tới truy vết tỉ mỉ các đoạn mã của giao diện người dùng, CSDL, hoặc các thành phần khác của chương trình. Mô hình phát triển hướng đối tượng trở nên phi thực tế. Do đó, hãy phân chia một chương trình phức tạp thành các tầng. Phát triển một thiết kế cho mỗi tầng để chúng trở nên gắn kết và chỉ phụ thuộc vào các tầng bên dưới. Dưới đây là giải pháp kiến trúc chung cho DDD.
+
+Ở đây mô hình DDD vẫn giữ lại những ưu điểm của mô hình kiến trúc phân lớp (Layered Archiecture) để đảm bảo nguyên lý Seperation of Concerns. Các phần logic xử lý khác nhau sẽ được cô lập ra khỏi các phần khác làm tăng tính Lose Coupling của ứng dụng và tính dễ đọc và dễ bảo trì cũng như ứng dụng khi có thay đổi logic của từng tầng thì không ảnh hướng đến các tầng khác.
+
+Tác giả Eric Evan đề xuất kiến trúc đa tầng bao gồm:
+
+\subsubsection{Tầng Application}
+
+Tầng này không chứa logic nghiệp vụ. Đó là phần dẫn người dùng từ giao diện này đến giao diện khác. Nó cũng tương tác với các tầng Application của các hệ thống khác. Nó có thể thực hiện xác nhận đơn giản nhưng nó không chứa logic liên quan đến nghiệp vụ hoặc quyền truy cập dữ liệu. Mục đích của nó là tổ chức và ủy quyền các đối tượng nghiệp vụ thực hiện công việc của chúng.
+
+\subsubsection{Tầng Domain}
+
+Đây là nơi chứa các khái niệm về lĩnh vực nghiệp vụ. Tầng này có tất cả thông tin về trường hợp nghiệp vụ và các quy tắc nghiệp vụ. Đây là vị trí của các thực thể, ví dụ như người dùng hoặc sản phẩm.
+
+Quan trọng nhất, tầng này phải nằm ở trung tâm, điều này có nghĩa là nó nên được tách biệt với phần còn lại của các tầng. Nó không nên phụ thuộc vào các tầng khác hoặc khuôn khổ của chúng.
+
+\subsubsection{Tầng Infrastructure}
+
+Tầng Infrastructure làm việc trực tiếp với hạ tầng công nghệ của hệ thống phần mềm. Các chức năng chính của tầng này bao gồm:
+
+\begin{itemize}
+	\item Truy vấn, thay đổi thông tin trong cơ sở dữ liệu
+	\item Quản lý dữ liệu trên vùng nhớ tạm thời (cache data)
+	\item Bảo mật, giám sát, lưu trữ thông tin hoạt động (log, monitor)
+\end{itemize}
+
+Tầng này đóng vai trò như một thư viện hỗ trợ cho tất cả các tầng còn lại. Nó cung cấp thông tin liên lạc giữa các lớp, cung cấp chức năng lưu trữ các đối tượng nghiệp vụ, chứa các thư viện hỗ trợ cho tầng giao diện người dùng...
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height = 0.5\textwidth]{ddd-layer}
+	\caption{Các tầng trong DDD}
+\end{figure}
+
+Domain-Driven Design chứa các khuôn mẫu (building blocks) có mục đích là để trình bày một số yếu tố chính của mô hình hóa hướng đối tượng và thiết kế phần mềm từ quan điểm của DDD.
+
+Các khuôn mẫu cơ bản được sử dụng trong DDD gồm: Entities, Service, Value Object, Repository và Aggregate.
+
+\subsubsection{Entities}
+
+Trong các đối tượng của một phần mềm, có một nhóm các đối tượng có định danh riêng. Đối với những đối tượng này thì các thuộc tính của chúng có giá trị như thế nào không quan trọng bằng việc chúng tồn tại liên tục và xuyên suốt quá trình của hệ thống, thậm chí là sau cả khi đó. Chúng được gọi tên là thực thể - Entity.
+
+Các Entities là sự kết hợp của dữ liệu và hành vi, như người dùng hoặc sản phẩm. Chúng có danh tính, nhưng đại diện cho các điểm dữ liệu với hành vi.
+
+Lấy ví dụ, để tạo một lớp Person chứa thông tin về một người chúng ta có thể tạo Person với các trường như: tên, ngày sinh, nơi sinh v.v... Những thuộc tính này có thể coi là định danh của một người không? Tên thì không phải vì có thể có trường hợp trùng tên nhau, ngày sinh cũng không phải là định danh vì trong một ngày có rất nhiều người sinh ra, và nơi sinh cũng vậy. Một đối tượng cần phải được phân biệt với những đối tượng khác cho dù chúng có chung thuộc tính đi chăng nữa. Việc nhầm lẫn về định danh giữa các đối tượng có thể gây lỗi dữ liệu nghiêm trọng.
+
+Đối với một người đó có thể là một tổ hợp của các thông tin như: tên, ngày sinh, nơi sinh, tên bố mẹ, địa chỉ hiện tại... Đối với một tài khoản ngân hàng thì số tài khoản là đủ để tạo định danh. Điểm mấu chốt ở đây là hệ thống có thể phân biệt hai đối tượng với hai định danh khác nhau một cách dễ dàng, hay hai đối tượng chung định danh có thể coi là một.
+
+\subsubsection{Value objects}
+
+Một đối tượng mà được dùng để mô tả các khía cạnh cố định của một domain, và không có định danh, được gọi tên là Value Object.
+
+Value Object thể hiện những thành phần hoặc khái niệm của domain mà chỉ được biết bằng đặc điểm của nó. Chúng được dùng như mô tả của thành phần trong model, và không yêu cầu định danh. Value Object không cần định danh bởi vì chúng luôn kết hợp với một đối tượng khác và do đó luôn có thể hiểu được trong ngữ cảnh cụ thể.
+
+Một điểm quan trọng là Value Object được xem như là bất biến, và không bao giờ được thay đổi trong vòng đời của mình. Ưu điểm của nó là nhờ không có định danh nên có thể tạo và xóa dễ dàng.
+
+Value object có các thuộc tính, nhưng không thể tự tồn tại. Ví dụ: địa chỉ giao hàng có thể là một value object. Các hệ thống lớn và phức tạp có vô số entitiy và value object. Đó là lý do tại sao mô hình miền cần một số loại khuôn mẫu tiếp theo. Điều này sẽ đưa chúng vào các Aggregates hợp lý sẽ dễ quản lý hơn.
+
+\subsubsection{Aggregates}
+
+Những nhóm này được gọi là Aggregates. Chúng đại diện cho một tập hợp các đối tượng được kết nối với nhau, với mục tiêu coi chúng như các đơn vị. Hơn nữa, chúng cũng có một aggregate root. Đây là thực thể duy nhất mà bất kỳ đối tượng nào bên ngoài tổng thể đều có thể tham chiếu đến.
+
+Entity và Value Object hình thành nên những mối quan hệ phức tạp trong domain model. Khi hệ thống lớn và có sự kết nối, tương tác giữa nhiều đối tượng, việc đảm bảo tính tương tranh và nhất quán trở nên khó khăn.
+
+Do vậy, chúng ta cần sử dụng Aggregate. Một Aggregate là một nhóm các đối tượng, nhóm này có thể được xem như là một đơn vị thống nhất đối với các thay đổi dữ liệu. Một Aggregate được phân tách với phần còn lại của hệ thống, ngăn cách giữa các đối tượng nội tại và các đối tượng ở ngoài. Mỗi Aggregate có một "gốc" (Aggregate root), đó là một Entity và cũng là đối tượng duy nhất có thể truy cập từ phía ngoài của Aggregate. Gốc của Aggregate có thể chứa những tham chiếu đến các đối tượng khác trong Aggregate, và những đối tượng trong này có thể chứa tham chiếu đến nhau, nhưng các đối tượng ở ngoài chỉ có thể tham chiếu đến gốc của Aggreagte. Nếu như trong Aggregate có những Entity khác thì định danh của chúng là nội tại, chỉ mang ý nghĩa trong Aggregate.
+
+\subsubsection{Service}
+
+The domain service is an additional layer that also contains domain logic. It’s part of the domain model, just like entities and value objects. At the same time, the application service is another layer that doesn’t contain business logic. However, it’s here to coordinate the activity of the application, placed above the domain model.
+
+Service là một lớp bổ sung cũng chứa logic nghiệp vụ. Nó là một phần của domain model, giống như các entity và value object. Đồng thời, dịch vụ ứng dụng là một lớp khác không chứa logic nghiệp vụ. Tuy nhiên, nó ở đây để điều phối hoạt động của ứng dụng, được đặt phía trên domain model.
+
+Khi phân tích domain để xác định những đối tượng chính có trong mô hình, có thể bắt gặp những thành phần không dễ để có thể gán chúng cho một đối tượng nhất định nào đó. Tuy nhiên có một số hành vi trong domain lại không thuộc về một đối tượng nhất định nào cả. Chúng thể hiện cho những hành vi quan trọng trong domain nên không thể bỏ qua chúng hoặc gắn vào các Entity hay Value Object. Việc thêm hành vi này vào một đối tượng sẽ làm mất ý nghĩa của đối tượng đó, gán cho chúng những chức năng vốn không thuộc về chúng.
+
+Đối với những hành vi như vậy trong domain, đó chính là một Service. Một Service không có trạng thái nội tại và nhiệm vụ của nó đơn giản là cung cấp các chức năng cho domain. Service có thể đóng một vai trò quan trọng trong domain, chúng có thể bao gồm các chức năng liên quan đến nhau để hỗ trợ cho các Entity và Value Object. Việc khai báo một Service một cách tường minh giúp phân biệt rõ các chức năng trong domain đó, giúp tách biệt rạch ròi khái niệm.
+
+Một Service không nên bao gồm các thao tác vốn thuộc về các đối tượng của domain. Sẽ là không nên cứ có bất kỳ thao tác nào chúng ta cũng tạo một Service cho chúng. Chỉ khi một thao tác đóng một vai trò quan trọng trong domain ta mới cần tạo một Service để thực hiện.
+
+\subsubsection{Repository}
+
+Repository là một tập hợp các thực thể nghiệp vụ giúp đơn giản hóa cơ sở hạ tầng dữ liệu. Nó giải phóng domail model khỏi những lo ngại về cơ sở hạ tầng.
+
+Mục đích của repository là để đóng gói tất cả các logic cần thiết để thu được các tham chiếu đối tượng. Các đối tượng domain sẽ không cần phải xử lý với cơ sở dữ liệu để lấy những tham chiếu cần thiết tới các đối tượng khác của domain. Chúng sẽ chỉ lấy nó từ Repository và model lấy lại được sự rõ ràng và tập trung.
+
+Repository có thể lưu trữ các tham chiếu tới một vài đối tượng. Khi một đối tượng được khởi tạo, nó có thể được lưu lại trong Repository, và được lấy ra từ đây để có thể sử dụng sau này. Nếu phía client yêu cầu đối tượng từ Repository, và Repository không chứa chúng, nó có thể sẽ được lấy từ bộ nhớ. Dù bằng cách nào, các Repository hoạt động như một nơi lưu trữ các đối tượng cho việc truy xuất đối tượng toàn cục.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 1\textwidth]{building-block}
+	\caption{Các khuôn mẫu trong DDD}
+\end{figure}
+
 \section{Kiến trúc tổng quan hệ thống}
 
 \subsection{Hệ thống frontend}
