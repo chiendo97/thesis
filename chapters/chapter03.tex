@@ -2,14 +2,60 @@
 
 \section{Ứng dụng Domain Driven Design}
 
-\subsection{Phân tầng}
+\subsection{Cấu trúc A/B Test}
 
-\subsection{Định nghĩa lớp}
+Trong cấu trúc của một A/B Test, các thành phần được phân loại vào cách khuôn mẫu theo bảng dưới đây.
+
+Các thành phần bao gồm: Product, Layer, Experiment, Test Group và Parameter.
+
+Các khuôn mẫu bao gồm: Entity, Aggregate và Value object.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|p{11cm}|}
+		\hline
+		Từ vựng                     & Khuôn mẫu    & Giải thích                                                                               \\ \hline
+		\multirow{2}{*}{Product}    & Entity       & Product có chức năng chia rẽ các nghiệp vụ theo từng team, có id định danh riêng         \\ \cline{2-3}
+		                            & Aggregate    & Product là tổng hợp của các Layers.                                                      \\ \hline
+		\multirow{2}{*}{Layer}      & Entity       & Layer có chức năng đại diện cho các nghiệp vụ bé hơn của mỗi team, có id định danh riêng \\ \cline{2-3}
+		                            & Aggregate    & Layer là tổng hợp của các Experiment                                                     \\ \hline
+		\multirow{2}{*}{Experiment} & Entity       & Experiment là một lần thử chạy thử nghiệm, có id định danh riêng                         \\ \cline{2-3}
+		                            & Aggregate    & Experiment có nhiều Test Group                                                           \\ \hline
+		\multirow{2}{*}{Test Group} & Entity       & Mỗi Test Group là một sự thay đổi nhỏ trong một Experiment, có id định danh riêng        \\ \cline{2-3}
+		                            & Aggregate    & Test Group gồm nhiều Parameter                                                           \\ \hline
+		Parameter                   & Value object & Parameter không có id định danh, có thể thuộc nhiều Test Group khác nhau                 \\ \hline
+	\end{tabular}
+	\caption{Khuôn mẫu cấu trúc A/B Test}
+\end{table}
+
+\subsection{Hệ thống backend}
+
+Trong hệ thống backend của A/B Test, các thành phần được phân loại thành các khuôn mẫu như bảng dưới đây.
+
+Các thành phần bao gồm: Service, Storage, Types và Database.
+
+Các khuôn mẫu bao gồm: Services, Repository và Aggregate.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|p{12cm}|}
+		\hline
+		Từ vựng  & Khuôn mẫu                 & Giải thích                                                                                                     \\ \hline
+		Service  & \multirow{3}{*}{Services} & Service chịu trách nghiệm điều phối hoạt động giữa tầng Application và domail model thông qua phương thức HTTP \\ \cline{1-1} \cline{3-3}
+		Storage  &                           & Storage chịu trách nghiệm tổng hợp các Entity từ tầng Database                                                 \\ \cline{1-1} \cline{3-3}
+		AbTest   &                           & AbTest chịu trách nghiệm thực hiện AbTest dựa trên các Entities (product, layer, experiment, v.v...)           \\ \hline
+		Database & Repository                & Database là tầng trung gian giữa các tầng khác và tầng cơ sở dữ liệu (Redis)                                   \\ \hline
+		Types    & Aggregate                 & Types là nơi tổng hợp các Entities (product, experiment, v.v...) và các Value object khác (parameter, v.v..)   \\ \hline
+	\end{tabular}
+	\caption{Khuôn mẫu trong hệ thống backend}
+\end{table}
+
+% \subsection{Phân tầng}
 
 % \subsubsection{Tầng Application}
-%
+
 % \subsubsection{Tầng Domain}
-%
+
 % \subsubsection{Tầng Infrastructure}
 
 \section{Triển khai chi tiết Use case}
@@ -19,7 +65,7 @@
 \subsubsection{Bước 1: Xác định ngữ cảnh}
 
 \begin{itemize}
-	\item Phía frontend gồm có: page để hiển thị và khởi tạo các thực thể
+	\item Phía frontend gồm có: các trang để hiển thị và khởi tạo các thực thể
 	\item Phía backend gồm có: Service, Storage, Database
 \end{itemize}
 
@@ -103,6 +149,7 @@ Unit testing và integration testing:
 		Chi phí bảo trì kiểm thử đơn vị là rất ít vì nó được duy trì và mức đơn vị.                                                                               & Kiểm thử tích hợp bảo trì là khá tốn kém vì nó đòi hỏi phải thiết lập môi trường riêng biệt.                                                 \\ \hline
 		Kiểm thử đơn vị không xác minh xem mã code có hoạt động như mong đợi với các phụ thuộc bên ngoài hay không.                                               & Kiểm thử tích hợp giúp xác minh rằng mã code hoạt động như mong đợi với các phụ thuộc bên ngoài.                                             \\ \hline
 	\end{tabular}
+	\caption{Unit testing và Integration testing}
 \end{table}
 
 Quy trình kiểm thử gồm 5 bước triển khai: Khởi tạo môi trường, chuẩn bị dữ liệu người dùng, gọi API, kiểm tra dữ liệu trả về, xóa môi trường.

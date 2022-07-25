@@ -156,8 +156,6 @@ Do vậy, chúng ta cần sử dụng Aggregate. Một Aggregate là một nhóm
 
 \subsubsection{Service}
 
-The domain service is an additional layer that also contains domain logic. It’s part of the domain model, just like entities and value objects. At the same time, the application service is another layer that doesn’t contain business logic. However, it’s here to coordinate the activity of the application, placed above the domain model.
-
 Service là một lớp bổ sung cũng chứa logic nghiệp vụ. Nó là một phần của domain model, giống như các entity và value object. Đồng thời, dịch vụ ứng dụng là một lớp khác không chứa logic nghiệp vụ. Tuy nhiên, nó ở đây để điều phối hoạt động của ứng dụng, được đặt phía trên domain model.
 
 Khi phân tích domain để xác định những đối tượng chính có trong mô hình, có thể bắt gặp những thành phần không dễ để có thể gán chúng cho một đối tượng nhất định nào đó. Tuy nhiên có một số hành vi trong domain lại không thuộc về một đối tượng nhất định nào cả. Chúng thể hiện cho những hành vi quan trọng trong domain nên không thể bỏ qua chúng hoặc gắn vào các Entity hay Value Object. Việc thêm hành vi này vào một đối tượng sẽ làm mất ý nghĩa của đối tượng đó, gán cho chúng những chức năng vốn không thuộc về chúng.
