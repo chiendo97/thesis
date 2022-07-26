@@ -136,6 +136,12 @@ Lấy ví dụ, để tạo một lớp Person chứa thông tin về một ngư
 
 Đối với một người đó có thể là một tổ hợp của các thông tin như: tên, ngày sinh, nơi sinh, tên bố mẹ, địa chỉ hiện tại... Đối với một tài khoản ngân hàng thì số tài khoản là đủ để tạo định danh. Điểm mấu chốt ở đây là hệ thống có thể phân biệt hai đối tượng với hai định danh khác nhau một cách dễ dàng, hay hai đối tượng chung định danh có thể coi là một.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 1\textwidth]{entity}
+	\caption{Khuôn mẫu Entity}
+\end{figure}
+
 \subsubsection{Value objects}
 
 Một đối tượng mà được dùng để mô tả các khía cạnh cố định của một domain, và không có định danh, được gọi tên là Value Object.
@@ -154,6 +160,12 @@ Entity và Value Object hình thành nên những mối quan hệ phức tạp t
 
 Do vậy, chúng ta cần sử dụng Aggregate. Một Aggregate là một nhóm các đối tượng, nhóm này có thể được xem như là một đơn vị thống nhất đối với các thay đổi dữ liệu. Một Aggregate được phân tách với phần còn lại của hệ thống, ngăn cách giữa các đối tượng nội tại và các đối tượng ở ngoài. Mỗi Aggregate có một "gốc" (Aggregate root), đó là một Entity và cũng là đối tượng duy nhất có thể truy cập từ phía ngoài của Aggregate. Gốc của Aggregate có thể chứa những tham chiếu đến các đối tượng khác trong Aggregate, và những đối tượng trong này có thể chứa tham chiếu đến nhau, nhưng các đối tượng ở ngoài chỉ có thể tham chiếu đến gốc của Aggreagte. Nếu như trong Aggregate có những Entity khác thì định danh của chúng là nội tại, chỉ mang ý nghĩa trong Aggregate.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 1\textwidth]{aggregate}
+	\caption{Khuôn mẫu Aggregates}
+\end{figure}
+
 \subsubsection{Service}
 
 Service là một lớp bổ sung cũng chứa logic nghiệp vụ. Nó là một phần của domain model, giống như các entity và value object. Đồng thời, dịch vụ ứng dụng là một lớp khác không chứa logic nghiệp vụ. Tuy nhiên, nó ở đây để điều phối hoạt động của ứng dụng, được đặt phía trên domain model.
@@ -163,6 +175,12 @@ Khi phân tích domain để xác định những đối tượng chính có tro
 Đối với những hành vi như vậy trong domain, đó chính là một Service. Một Service không có trạng thái nội tại và nhiệm vụ của nó đơn giản là cung cấp các chức năng cho domain. Service có thể đóng một vai trò quan trọng trong domain, chúng có thể bao gồm các chức năng liên quan đến nhau để hỗ trợ cho các Entity và Value Object. Việc khai báo một Service một cách tường minh giúp phân biệt rõ các chức năng trong domain đó, giúp tách biệt rạch ròi khái niệm.
 
 Một Service không nên bao gồm các thao tác vốn thuộc về các đối tượng của domain. Sẽ là không nên cứ có bất kỳ thao tác nào chúng ta cũng tạo một Service cho chúng. Chỉ khi một thao tác đóng một vai trò quan trọng trong domain ta mới cần tạo một Service để thực hiện.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 1\textwidth]{repository}
+	\caption{Khuôn mẫu Service}
+\end{figure}
 
 \subsubsection{Repository}
 
@@ -174,7 +192,7 @@ Repository có thể lưu trữ các tham chiếu tới một vài đối tượ
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width = 1\textwidth]{building-block}
+	\includegraphics[width = 1\textwidth]{building-blocks}
 	\caption{Các khuôn mẫu trong DDD}
 \end{figure}
 
@@ -192,42 +210,43 @@ Mỗi thực thể đều có một hệ thống Trang nhằm mục đích cho n
 	\centering
 	\begin{tabular}{|c|l|p{5cm}|}
 		\hline
-		Trang                       & Đường dẫn                                       & Chú thích                                      \\ \hline
-		\multirow{4}{*}{Product}    & /product                                        & Hiển thị toàn bộ Product                       \\ \cline{2-3}
-		                            & /product/new                                    & Khởi tạo một Product mới                       \\ \cline{2-3}
-		                            & /product/:id                                    & Hiển thị một Product                           \\ \cline{2-3}
-		                            & /product/:id/update                             & Cập nhật một Product                           \\ \hline
-		\multirow{4}{*}{Layer}      & /product/:id/layer                              & Hiển thị toàn bộ Layer của một Product         \\ \cline{2-3}
-		                            & /product/:id/layer/new                          & Khởi tạo một Layer mới                         \\ \cline{2-3}
-		                            & /product/:id/layer/:id                          & Hiển thị một Layer                             \\ \cline{2-3}
-		                            & /product/:id/layer/:id/update                   & Cập nhật một Layer                             \\ \hline
-		\multirow{4}{*}{Experiment} & /product/:id/layer/:id/exp                      & Hiển thị toàn bộ Experiment của một Layer      \\ \cline{2-3}
-		                            & /product/:id/layer/:id/exp/new                  & Khởi tạo một Experiment mới                    \\ \cline{2-3}
-		                            & /product/:id/layer/:id/exp/:id                  & Hiển thị một Layer                             \\ \cline{2-3}
-		                            & /product/:id/layer/:id/exp/:id/update           & Cập nhật một Layer                             \\ \hline
-		\multirow{4}{*}{Group}      & /product/:id/layer/:id/exp/:id/group            & Hiển thị toàn bộ Test Group của một Experiment \\ \cline{2-3}
-		                            & /product/:id/layer/:id/exp/:id/group/new        & Khởi tạo một Test Group mới                    \\ \cline{2-3}
-		                            & /product/:id/layer/:id/exp/:id/group/:id        & Hiển thị một Test Group                        \\ \cline{2-3}
-		                            & /product/:id/layer/:id/exp/:id/group/:id/update & Cập nhật một Test Group                        \\ \hline
+		Trang                    & Đường dẫn                                       & Chú thích                   \\ \hline
+		\multirow{4}{*}{Product} & /product                                        & Hiển thị toàn bộ Product    \\ \cline{2-3}
+		                         & /product/new                                    & Khởi tạo một Product mới    \\ \cline{2-3}
+		                         & /product/:id                                    & Hiển thị một Product        \\ \cline{2-3}
+		                         & /product/:id/update                             & Cập nhật một Product        \\ \hline
+		\multirow{4}{*}{Layer}
+		                         & /product/:id/layer/new                          & Khởi tạo một Layer mới      \\ \cline{2-3}
+		                         & /product/:id/layer/:id                          & Hiển thị một Layer          \\ \cline{2-3}
+		                         & /product/:id/layer/:id/update                   & Cập nhật một Layer          \\ \hline
+		\multirow{4}{*}{Experiment}
+		                         & /product/:id/layer/:id/exp/new                  & Khởi tạo một Experiment mới \\ \cline{2-3}
+		                         & /product/:id/layer/:id/exp/:id                  & Hiển thị một Layer          \\ \cline{2-3}
+		                         & /product/:id/layer/:id/exp/:id/update           & Cập nhật một Layer          \\ \hline
+		\multirow{4}{*}{Group}
+		                         & /product/:id/layer/:id/exp/:id/group/new        & Khởi tạo một Test Group mới \\ \cline{2-3}
+		                         & /product/:id/layer/:id/exp/:id/group/:id        & Hiển thị một Test Group     \\ \cline{2-3}
+		                         & /product/:id/layer/:id/exp/:id/group/:id/update & Cập nhật một Test Group     \\ \hline
 	\end{tabular}
 	\caption{Hệ thống Trang}
 \end{table}
 
 \subsubsection{Các thành phần}
 
-Hệ thống frontend gồm các thành phần sau: Types, Pages, Features.
+Hệ thống frontend gồm các thành phần sau: Types, Pages, Services và Components
 
 \begin{itemize}
 	\bfitem{Types}{Mục đích là tổng hợp các thực thể ở tầng Frontend, bao gồm hai loại là Thực thể gốc và nội dung khi nhận/gửi API}
 	\bfitem{Pages}{Là thành phần xử lý hệ thống Trang, mỗi file sẽ là một hệ thống Trang khác nhau}
-	\bfitem{Features}{Là thành phần xử lý hệ thống thông tin cho toàn bộ hệ thống Frontend, bao gồm cả việc nhận, gửi dữ liệu từ Server}
+	\bfitem{Services}{Là thành phần xử lý hệ thống thông tin cho toàn bộ hệ thống Frontend, bao gồm cả việc nhận, gửi dữ liệu từ Server}
+	\bfitem{Components}{Chứa các thành phần chung giữa các trang}
 \end{itemize}
 
 \subsection{Hệ thống backend}
 
 \subsubsection{Các thành phần}
 
-Hệ thống backend gồm các thành phần sau: Service, Storage, Database, Types
+Các thành phần trong hệ thống backend đảm nhiệm một nhiệm vụ riêng biệt gồm các thành phần sau:
 
 \begin{itemize}
 	\bfitem{Service}{Là thành phần xử lý hệ thống HTTP, chuyên nhận và phản hồi các truy cập từ hệ thống Frontend}
@@ -236,17 +255,21 @@ Hệ thống backend gồm các thành phần sau: Service, Storage, Database, T
 		\bfitem{Abtest}{Thực hiện và gửi trả A/B Test}
 		\bfitem{Entity}{Thực hiện khởi tạo hoặc cập nhật các thực thể, gửi trả kết quả}
 	\end{itemize}
-	\bfitem{Storage}{Là thành phần xử lý hệ thống tổng hợp thông tin cho hệ thống Backend}
+	\bfitem{Storage}{Là thành phần tổng hợp thông tin cho tầng Service}
 	\begin{itemize}
 		\bfitem{Summary}{Tổng hợp toàn bộ dữ liệu của các A/B Test}
-		\bfitem{Abtest}{Thực hiện A/B Test}
 		\bfitem{Entity}{Khởi tạo hoặc cập nhật các thực thể}
 	\end{itemize}
-	\bfitem{Database}{Là thành phần xử lý hệ thống quản lý dữ liệu cho hệ thống Backend}
+	\bfitem{Database}{Là thành phần quản lý dữ liệu cho tầng Storage}
 	\begin{itemize}
 		\bfitem{Entity}{Khởi tạo hoặc cập nhật các thực thể}
 	\end{itemize}
-	\bfitem{Types}{Tổng hợp các thực thể ở tầng Backend, bao gồm 2 loại là: Thực thể gốc và nội dung khi nhận/gửi API}
+	\bfitem{Types}{Tổng hợp các thực thể ở tầng Backend, bao gồm 2 loại là: thực thể gốc và nội dung khi nhận/gửi API}
+	\begin{itemize}
+		\bfitem{Entity}{Dữ liệu của các thực thể}
+		\bfitem{API}{Dữ liệu nội dung cho các yêu cầu/kết quả khi truy cập}
+	\end{itemize}
+	\bfitem{Abtest}{Thực hiện A/B Test}
 \end{itemize}
 
 \begin{figure}[H]
@@ -257,9 +280,7 @@ Hệ thống backend gồm các thành phần sau: Service, Storage, Database, T
 
 \subsubsection{Hệ thống API}
 
-Hệ thống đường dẫn bao gồm các thực thể sau: Summary, AbTest, Product, Layer, Experiment và Test Group.
-
-Mỗi thực thể có chức năng riêng biệt nhau.
+Mỗi thực thể có chức năng riêng biệt nhau. Hệ thống đường dẫn bao gồm các thực thể sau:
 
 \begin{table}[H]
 	\centering
@@ -280,6 +301,84 @@ Mỗi thực thể có chức năng riêng biệt nhau.
 	\caption{Hệ thống đường dẫn}
 \end{table}
 
+Với mỗi API, sẽ có cấu trúc về yêu cầu và kết quả như sau:
+
+\begin{itemize}
+	\bfitem{Summary}{}
+	\begin{itemize}
+		\bfitem{Kết quả}{Toàn bộ Product, trong Product có toàn bộ Layer của Product đó, v.v}
+	\end{itemize}
+	\bfitem{AbTest}{}
+	\begin{itemize}
+		\bfitem{Yêu cầu}{Thông tin của user và product nào cần thực hiện A/B Test}
+		\begin{itemize}
+			\bfitem{product id}{Id của Product cần thực hiện A/B Test}
+			\bfitem{user id}{Id của người dùng}
+			\bfitem{session id}{Id của sesion mà người dùng đang sử dụng}
+		\end{itemize}
+		\bfitem{Kết quả}{Thông tin của các A/B Test thử nghiệm với user}
+		\begin{itemize}
+			\bfitem{product id}{Id của Product đang thực hiện A/B Test}
+			\bfitem{layer id}{Id của Layer sẽ thực hiện A/B Test này}
+			\bfitem{experiment id}{Id của Experiment sẽ thực hiện A/B Test này}
+			\bfitem{test group id}{Id của Test Group sẽ thực hiện A/B Test này}
+			\bfitem{parameters}{Tên và giá trị của các Parameter}
+		\end{itemize}
+	\end{itemize}
+	\bfitem{Product}{}
+	\begin{itemize}
+		\bfitem{Create}{Khởi tạo một Product}
+		\begin{itemize}
+			\bfitem{Yêu cầu}{Nội dung của Product đó}
+			\bfitem{Kết quả}{Nội dung của Product đó cộng thêm mã id định danh}
+		\end{itemize}
+		\bfitem{Update}{Cập nhật một Product}
+		\begin{itemize}
+			\bfitem{Yêu cầu}{Nội dung của Product đó}
+			\bfitem{Kết quả}{Nội dung của Product đó}
+		\end{itemize}
+	\end{itemize}
+	\bfitem{Layer}{}
+	\begin{itemize}
+		\bfitem{Create}{Khởi tạo một Layer}
+		\begin{itemize}
+			\bfitem{Yêu cầu}{Nội dung của Layer đó}
+			\bfitem{Kết quả}{Nội dung của Layer đó cộng thêm mã id định danh}
+		\end{itemize}
+		\bfitem{Update}{Cập nhật một Layer}
+		\begin{itemize}
+			\bfitem{Yêu cầu}{Nội dung của Layer đó}
+			\bfitem{Kết quả}{Nội dung của Layer đó}
+		\end{itemize}
+	\end{itemize}
+	\bfitem{Experiment}{}
+	\begin{itemize}
+		\bfitem{Create}{Khởi tạo một Experiment}
+		\begin{itemize}
+			\bfitem{Yêu cầu}{Nội dung của Experiment đó}
+			\bfitem{Kết quả}{Nội dung của Experiment đó cộng thêm mã id định danh}
+		\end{itemize}
+		\bfitem{Update}{Cập nhật một Experiment}
+		\begin{itemize}
+			\bfitem{Yêu cầu}{Nội dung của Experiment đó}
+			\bfitem{Kết quả}{Nội dung của Experiment đó}
+		\end{itemize}
+	\end{itemize}
+	\bfitem{Test Group}{}
+	\begin{itemize}
+		\bfitem{Create}{Khởi tạo một Test Group}
+		\begin{itemize}
+			\bfitem{Yêu cầu}{Nội dung của Test Group đó}
+			\bfitem{Kết quả}{Nội dung của Test Group đó cộng thêm mã id định danh}
+		\end{itemize}
+		\bfitem{Update}{Cập nhật một Test Group}
+		\begin{itemize}
+			\bfitem{Yêu cầu}{Nội dung của Test Group đó}
+			\bfitem{Kết quả}{Nội dung của Test Group đó}
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
 \subsection{Biểu đồ tuần tự}
 
 \subsubsection{Biểu đồ tuần tự chung}
@@ -294,7 +393,7 @@ Biểu đồ tuần tự chung biểu thị việc khởi tạo và sử dụng 
 
 \subsubsection{Biểu đồ tuần tự khởi tạo A/B Test}
 
-Biểu đồ tuần tự khởi tạo A/B Test biểu thị
+Biểu đồ tuần tự khởi tạo A/B Test
 
 \begin{figure}[H]
 	\centering
@@ -319,7 +418,7 @@ Product là thực thể lớn nhất, chỉ có chức năng phân tách theo n
 	\begin{tabular}{|l|l|l|}
 		\hline
 		Trường & Loại   & Chú thích       \\ \hline
-		id     & int    & Unique id       \\ \hline
+		id     & int    & Mã id định danh       \\ \hline
 		name   & string & Tên của Product \\ \hline
 	\end{tabular}
 	\caption{Thuộc tính của Product}
@@ -329,7 +428,7 @@ Cấu hình khi được lưu xuống cơ sở dữ liệu:
 
 \begin{itemize}
 	\bfitem{Key}{product::[id]}
-	\bfitem{Value}{binary (nén bởi protobuf)}
+	\bfitem{Value}{binary (nén bởi JSON)}
 	\bfitem{Command}{SET, GET}
 \end{itemize}
 
@@ -340,7 +439,7 @@ Cấu hình khi được lưu xuống cơ sở dữ liệu:
 	\begin{tabular}{|l|l|l|}
 		\hline
 		Trường & Loại   & Chú thích      \\ \hline
-		id     & int    & Unique id      \\ \hline
+		id     & int    & Mã id định danh      \\ \hline
 		name   & string & Tên của Layer  \\ \hline
 		type   & int    & Loại của Layer \\ \hline
 	\end{tabular}
@@ -351,7 +450,7 @@ Cấu hình khi được lưu xuống cơ sở dữ liệu:
 
 \begin{itemize}
 	\bfitem{Key}{layer::[id]}
-	\bfitem{Value}{binary (nén bởi protobuf)}
+	\bfitem{Value}{binary (nén bởi JSON)}
 	\bfitem{Command}{SET, GET}
 \end{itemize}
 
@@ -362,7 +461,7 @@ Cấu hình khi được lưu xuống cơ sở dữ liệu:
 	\begin{tabular}{|l|l|l|}
 		\hline
 		Trường      & Loại   & Chú thích          \\ \hline
-		id          & int    & Unique id          \\ \hline
+		id          & int    & Mã id định danh          \\ \hline
 		name        & string & Tên của Experiment \\ \hline
 		traffic     & int    & Số lượng traffic   \\ \hline
 		start\_time & int    & Thời điểm bắt đầu  \\ \hline
@@ -376,7 +475,7 @@ Cấu hình khi được lưu xuống cơ sở dữ liệu:
 
 \begin{itemize}
 	\bfitem{Key}{exp::[id]}
-	\bfitem{Value}{binary (nén bởi protobuf)}
+	\bfitem{Value}{binary (nén bởi JSON)}
 	\bfitem{Command}{SET, GET}
 \end{itemize}
 
@@ -387,7 +486,7 @@ Cấu hình khi được lưu xuống cơ sở dữ liệu:
 	\begin{tabular}{|l|l|l|}
 		\hline
 		Trường    & Loại   & Chú thích                \\ \hline
-		id        & int    & Unique id                \\ \hline
+		id        & int    & Mã id định danh                \\ \hline
 		parameter & string & Parameter của Test Group \\ \hline
 		value     & string & Value của Parameter      \\ \hline
 	\end{tabular}
@@ -398,7 +497,7 @@ Cấu hình khi được lưu xuống cơ sở dữ liệu:
 
 \begin{itemize}
 	\bfitem{Key}{group::[id]}
-	\bfitem{Value}{binary (nén bởi protobuf)}
+	\bfitem{Value}{binary (nén bởi JSON)}
 	\bfitem{Command}{SET, GET}
 \end{itemize}
 
