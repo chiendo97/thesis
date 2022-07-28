@@ -2,46 +2,6 @@
 
 \section{Cơ sở lý thuyết của kiến trúc}
 
-\subsection{Kiến trúc Onion}
-
-Onion Architecture (Kiến trúc củ hành) được xây dựng dựa trên ý tưởng đặt Domain vào trung tâm ứng dụng, mở rộng cơ chế phân phối (UI) và cơ sở hạ tầng được xây dựng bởi hệ thống.
-
-Các tầng được biểu diễn thành dạng các vòng tròn đồng tâm. Đặc trưng của kiến trúc củ hành đó là một luật về sự ràng buộc giữa các tầng. Tầng bên ngoài chỉ phụ thuộc và gọi trực tiếp tầng bên trong. Các tầng thấp hơn không thể phụ thuộc vào các tầng bên ngoài.
-
-Hầu hết các kiến trúc truyền thống đều nêu lên những vấn đề cơ bản về sự kết hợp giữa các thành phần một cách chặt chẽ và tách biệt. Kiến trúc Onion được Jeffrey Palermo giới thiệu để cung cấp một cách tốt hơn để xây dựng các ứng dụng theo quan điểm về khả năng kiểm tra, khả năng bảo trì và độ tin cậy tốt hơn.
-
-\subsubsection{Nguyên lý}
-
-Kiến trúc Onion dựa trên sự đảo ngược của nguyên tắc điều khiển. Kiến trúc Onion bao gồm nhiều lớp đồng tâm giao nhau về phía lõi đại diện cho miền. Kiến trúc không phụ thuộc vào lớp dữ liệu như trong các kiến trúc nhiều tầng cổ điển, mà dựa trên các mô hình miền thực tế.
-
-Theo kiến trúc truyền thống, lớp giao diện người dùng tương tác với logic nghiệp vụ và logic nghiệp vụ nói chuyện với lớp dữ liệu và tất cả các lớp được trộn lẫn và phụ thuộc nhiều vào nhau. Trong kiến trúc 3 tầng và n tầng, không có lớp nào là độc lập. Những hệ thống như vậy rất khó hiểu và khó bảo trì. Hạn chế của kiến trúc truyền thống này là khớp nối không cần thiết.
-
-Kiến trúc Onion đã giải quyết vấn đề này bằng cách xác định các lớp từ lõi đến Cơ sở hạ tầng. Nó áp dụng quy tắc cơ bản bằng cách di chuyển tất cả các khớp nối về phía trung tâm. Kiến trúc này chắc chắn thiên về lập trình hướng đối tượng và nó đặt các đối tượng trước tất cả các đối tượng khác. Trung tâm của Kiến trúc Onion là mô hình miền, đại diện cho các đối tượng hành vi và nghiệp vụ. Xung quanh lớp miền là các lớp khác, với nhiều hành vi hơn.
-
-\subsubsection{Các lớp của Kiến trúc Onion}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width = 1\textwidth]{onion_architecture}
-	\caption{Các lớp của Kiến trúc Onion}
-\end{figure}
-
-\textbf{Domain Layer - Lớp tên miền}
-
-Ở phần trung tâm của Kiến trúc Onion, lớp miền tồn tại; lớp này đại diện cho các đối tượng nghiệp vụ và hành vi. Ý tưởng là có tất cả các đối tượng miền của bạn ở cốt lõi này. Nó chứa tất cả các đối tượng miền ứng dụng. Bên cạnh các đối tượng miền, bạn cũng có thể có các giao diện miền. Các thực thể miền này không có bất kỳ phụ thuộc nào.
-
-\textbf{Repository Layer - Lớp kho lưu trữ}
-
-Lớp này tạo ra một sự trừu tượng giữa các thực thể miền và logic nghiệp vụ của một ứng dụng. Trong lớp này, thường thêm các giao diện cung cấp hành vi lưu và truy xuất đối tượng thường bằng cách liên quan đến cơ sở dữ liệu. Lớp này bao gồm mẫu truy cập dữ liệu, là một cách tiếp cận kết hợp lỏng hơn để truy cập dữ liệu. Chúng tôi cũng tạo một kho lưu trữ chung và thêm các truy vấn để truy xuất dữ liệu từ nguồn, ánh xạ dữ liệu từ nguồn dữ liệu sang một thực thể kinh doanh và duy trì những thay đổi trong thực thể kinh doanh đối với nguồn dữ liệu.
-
-\textbf{Services Layer - Lớp dịch vụ}
-
-Lớp Dịch vụ giữ các giao diện với các hoạt động phổ biến, chẳng hạn như Thêm, Lưu, Chỉnh sửa và Xóa. Ngoài ra, lớp này được sử dụng để giao tiếp giữa lớp UI và lớp kho lưu trữ. Lớp Dịch vụ cũng có thể giữ logic nghiệp vụ cho một thực thể. Trong lớp này, các giao diện dịch vụ được giữ với quá trình triển khai của nó, giữ cho sự liên kết lỏng và tách biệt các mối quan tâm trong tâm trí.
-
-\textbf{UI Layer - Lớp giao diện người dùng}
-
-Đây là lớp ngoài cùng và giữ các mối quan tâm ngoại vi như giao diện người dùng và các thử nghiệm. Đối với một ứng dụng Web, nó đại diện cho dự án Web API hoặc Unit Test. Lớp này có sự triển khai của nguyên tắc tiêm phụ thuộc để ứng dụng xây dựng một cấu trúc liên kết lỏng và có thể giao tiếp với lớp bên trong thông qua các giao diện.
-
 \subsection{Kiến trúc Modular}
 
 Kiến trúc Modular là kiểu kiến trúc phần mềm cho phép quản lý sự phức tạp của một vấn đề bằng cách chia nhỏ chúng thành các Modular để dễ quản lý hơn với các nguyên tắc và mô hình. Modular là một đơn vị phần mềm không trạng thái có thể triển khai, quản lý, tái sử dụng, kết hợp lại và cung cấp giao diện ngắn gọn cho người dùng.
@@ -196,6 +156,48 @@ Repository có thể lưu trữ các tham chiếu tới một vài đối tượ
 	\caption{Các khuôn mẫu trong DDD}
 \end{figure}
 
+\subsection{Kiến trúc Onion}
+
+Domain-driven design (DDD) là một cách tiếp cận để phát triển phần mềm cho các nhu cầu phức tạp bằng cách kết nối việc triển khai với một mô hình kinh doanh cốt lõi. DDD tập trung vào mô hình nghiệp vụ có hiểu biết phong phú về các quy trình và quy tắc của nghiệp vụ. Kiến trúc Onion thực hiện khái niệm này và tăng đáng kể chất lượng mã code, giảm độ phức tạp và cho phép các hệ thống doanh nghiệp phát triển.
+
+Kiến trúc Onion được xây dựng trên mô hình nghiệp vụ trong đó các lớp được kết nối thông qua các interface. Ý tưởng là giữ các phụ thuộc bên ngoài càng xa càng tốt, nơi các thực thể nghiệp vụ và các quy tắc nghiệp vụ tạo thành phần cốt lõi của kiến trúc.
+
+\begin{itemize}
+	\item Nó cung cấp kiến trúc linh hoạt, bền vững và dễ mở rộng
+	\item Các lớp được liên kết chặt chẽ và có sự phân tách rõ ràng
+	\item Nó cung cấp khả năng bảo trì tốt hơn vì tất cả mã code phụ thuộc vào các lớp sâu hơn hoặc lớp trung tâm
+	\item Cải thiện khả năng kiểm tra vì các kiểm tra có thể được tạo cho các lớp riêng biệt mà không ảnh hưởng đến các lớp khác
+	\item Các công nghệ có thể dễ dàng thay đổi mà không ảnh hưởng đến nghiệp vụ lõi
+\end{itemize}
+
+Các tầng được biểu diễn thành dạng các vòng tròn đồng tâm. Đặc trưng của kiến trúc củ hành đó là một luật về sự ràng buộc giữa các tầng. Tầng bên ngoài chỉ phụ thuộc và gọi trực tiếp tầng bên trong. Các tầng thấp hơn không thể phụ thuộc vào các tầng bên ngoài.
+
+\subsubsection{Nguyên lý}
+
+Kiến trúc Onion bao gồm nhiều lớp đồng tâm giao thoa với nhau về phía lõi đại diện cho nghiệp vụ. Nó dựa trên sự đảo ngược của nguyên tắc điều khiển. Kiến trúc không tập trung vào công nghệ hay khuôn khổ mà là các mô hình nghiệp vụ thực tế. Nó dựa trên các nguyên tắc sau:
+
+\begin{itemize}
+	\bfitem{Sự phụ thuộc}{Các vòng tròn đại diện cho các lớp trách nhiệm khác nhau. Nói chung, càng đi sâu, các lớp càng tiến gần đến nghiệp vụ và các quy tắc kinh doanh. Các lớp bên ngoài đại diện cho các cơ chế và các lớp bên trong đại diện cho logic nghiệp vụ. Các lớp bên ngoài phụ thuộc vào các lớp bên trong và các lớp bên trong hoàn toàn không nhận biết được các lớp bên ngoài. Định dạng / cấu trúc dữ liệu có thể khác nhau giữa các lớp. Các định dạng dữ liệu lớp bên ngoài không được sử dụng bởi các lớp bên trong}
+	\bfitem{Bao bọc dữ liệu}{Mỗi lớp bao bọc hoặc ẩn các chi tiết triển khai bên trong và cung cấp API cho lớp bên ngoài. Tất cả các lớp cũng cần cung cấp thông tin để cho các lớp bên trong sử dụng một cách thuận tiện. Mục đích là giảm thiểu sự kết hợp giữa các lớp và tối đa hóa sự kết hợp trong một lát dọc giữa các lớp. Điều này đảm bảo sự tập trung vào mô hình nghiệp vụ mà không cần lo lắng quá nhiều về chi tiết triển khai}
+	\bfitem{Tách mối quan tâm}{Ứng dụng được chia thành các lớp trong đó mỗi lớp có một tập hợp các trách nhiệm và giải quyết các mối quan tâm riêng biệt. Mỗi lớp hoạt động như các modules/package/namespace tên trong ứng dụng}
+	\bfitem{Rằng buộc}{Rằng buộc thấp trong đó một module tương tác với một module khác và không cần quan tâm đến các phần bên trong của module đó. Tất cả các lớp bên trong không cần quan tâm đến việc triển khai của các lớp bên ngoài}
+\end{itemize}
+
+\subsubsection{Các lớp của Kiến trúc Onion}
+
+\begin{itemize}
+	\bfitem{Lớp nghiệp vụ}{Ở phần trung tâm của Kiến trúc Onion, lớp miền tồn tại; lớp này đại diện cho các đối tượng nghiệp vụ và hành vi. Ý tưởng là có tất cả các đối tượng miền của bạn ở cốt lõi này. Nó chứa tất cả các đối tượng miền ứng dụng. Bên cạnh các đối tượng miền, bạn cũng có thể có các giao diện miền. Các thực thể miền này không có bất kỳ phụ thuộc nào}
+	\bfitem{Lớp kho lưu trữ}{Lớp này tạo ra một sự trừu tượng giữa các thực thể miền và logic nghiệp vụ của một ứng dụng. Trong lớp này, thường thêm các giao diện cung cấp hành vi lưu và truy xuất đối tượng thường bằng cách liên quan đến cơ sở dữ liệu. Lớp này bao gồm mẫu truy cập dữ liệu, là một cách tiếp cận kết hợp lỏng hơn để truy cập dữ liệu. Chúng tôi cũng tạo một kho lưu trữ chung và thêm các truy vấn để truy xuất dữ liệu từ nguồn, ánh xạ dữ liệu từ nguồn dữ liệu sang một thực thể kinh doanh và duy trì những thay đổi trong thực thể kinh doanh đối với nguồn dữ liệu}
+	\bfitem{Lớp dịch vụ}{Lớp Dịch vụ giữ các giao diện với các hoạt động phổ biến, chẳng hạn như Thêm, Lưu, Chỉnh sửa và Xóa. Ngoài ra, lớp này được sử dụng để giao tiếp giữa lớp UI và lớp kho lưu trữ. Lớp Dịch vụ cũng có thể giữ logic nghiệp vụ cho một thực thể. Trong lớp này, các giao diện dịch vụ được giữ với quá trình triển khai của nó, giữ cho sự liên kết lỏng và tách biệt các mối quan tâm trong tâm trí}
+	\bfitem{Lớp giao diện người dùng}{Đây là lớp ngoài cùng và giữ các mối quan tâm ngoại vi như giao diện người dùng và các thử nghiệm. Đối với một ứng dụng Web, nó đại diện cho dự án Web API hoặc Unit Test. Lớp này có sự triển khai của nguyên tắc tiêm phụ thuộc để ứng dụng xây dựng một cấu trúc liên kết lỏng và có thể giao tiếp với lớp bên trong thông qua các giao diện}
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width = 0.7\textwidth]{onion_architecture}
+	\caption{Các lớp của Kiến trúc Onion}
+\end{figure}
+
 \section{Kiến trúc tổng quan hệ thống}
 
 \subsection{Hệ thống frontend}
@@ -210,26 +212,87 @@ Mỗi thực thể đều có một hệ thống Trang nhằm mục đích cho n
 	\centering
 	\begin{tabular}{|c|l|p{5cm}|}
 		\hline
-		Trang                    & Đường dẫn                                       & Chú thích                   \\ \hline
-		\multirow{4}{*}{Product} & /product                                        & Hiển thị toàn bộ Product    \\ \cline{2-3}
-		                         & /product/new                                    & Khởi tạo một Product mới    \\ \cline{2-3}
-		                         & /product/:id                                    & Hiển thị một Product        \\ \cline{2-3}
-		                         & /product/:id/update                             & Cập nhật một Product        \\ \hline
+		Trang                    & Đường dẫn                                       & Chú thích                \\ \hline
+		\multirow{4}{*}{Product} & /product                                        & Hiển thị toàn bộ Product \\ \cline{2-3}
+		                         & /product/new                                    & Khởi tạo Product         \\ \cline{2-3}
+		                         & /product/:id                                    & Hiển thị Product         \\ \cline{2-3}
+		                         & /product/:id/update                             & Cập nhật Product         \\ \hline
 		\multirow{4}{*}{Layer}
-		                         & /product/:id/layer/new                          & Khởi tạo một Layer mới      \\ \cline{2-3}
-		                         & /product/:id/layer/:id                          & Hiển thị một Layer          \\ \cline{2-3}
-		                         & /product/:id/layer/:id/update                   & Cập nhật một Layer          \\ \hline
+		                         & /product/:id/layer/new                          & Khởi tạo Layer           \\ \cline{2-3}
+		                         & /product/:id/layer/:id                          & Hiển thị Layer           \\ \cline{2-3}
+		                         & /product/:id/layer/:id/update                   & Cập nhật Layer           \\ \hline
 		\multirow{4}{*}{Experiment}
-		                         & /product/:id/layer/:id/exp/new                  & Khởi tạo một Experiment mới \\ \cline{2-3}
-		                         & /product/:id/layer/:id/exp/:id                  & Hiển thị một Layer          \\ \cline{2-3}
-		                         & /product/:id/layer/:id/exp/:id/update           & Cập nhật một Layer          \\ \hline
+		                         & /product/:id/layer/:id/exp/new                  & Khởi tạo Experiment      \\ \cline{2-3}
+		                         & /product/:id/layer/:id/exp/:id                  & Hiển thị Layer           \\ \cline{2-3}
+		                         & /product/:id/layer/:id/exp/:id/update           & Cập nhật Layer           \\ \hline
 		\multirow{4}{*}{Group}
-		                         & /product/:id/layer/:id/exp/:id/group/new        & Khởi tạo một Test Group mới \\ \cline{2-3}
-		                         & /product/:id/layer/:id/exp/:id/group/:id        & Hiển thị một Test Group     \\ \cline{2-3}
-		                         & /product/:id/layer/:id/exp/:id/group/:id/update & Cập nhật một Test Group     \\ \hline
+		                         & /product/:id/layer/:id/exp/:id/group/new        & Khởi tạo Test Group      \\ \cline{2-3}
+		                         & /product/:id/layer/:id/exp/:id/group/:id        & Hiển thị Test Group      \\ \cline{2-3}
+		                         & /product/:id/layer/:id/exp/:id/group/:id/update & Cập nhật Test Group      \\ \hline
 	\end{tabular}
 	\caption{Hệ thống Trang}
 \end{table}
+
+Với mỗi Trang, các thông tin sẽ được hiển thị như sau:
+
+\begin{itemize}
+	\bfitem{/product}{}
+	\begin{itemize}
+		\item Toàn bộ Product
+		\item Id của mỗi Product
+		\item Tên của mỗi Product
+		\item Số lượng Layer trong mỗi Product
+	\end{itemize}
+	\bfitem{/product/:id}{}
+	\begin{itemize}
+		\item Tên của Product
+		\item Số lượng Layer của Product
+		\item Số lượng Experiment của Product
+		\item Toàn bộ Layer của Product
+		      \begin{itemize}
+			      \item Id của mỗi Layer
+			      \item Tên của mỗi Layer
+			      \item Hash stragety của mỗi Layer
+			      \item Số lượng Experiment của mỗi Layer
+		      \end{itemize}
+	\end{itemize}
+	\bfitem{/product/:id/layer/:id}{}
+	\begin{itemize}
+		\item Tên của Layer
+		\item Hash stragety của Layer
+		\item Traffic còn lại của Layer
+		\item Số lượng Experiment của Layer
+		\item Toàn bộ Experiment của Layer
+		      \begin{itemize}
+			      \item Id của mỗi Experiment
+			      \item Tên của mỗi Experiment
+			      \item Traffic của mỗi Experiment
+			      \item Trạng thái của mỗi Experiment
+			      \item Thời điểm bắt đầu của mỗi Experiment
+			      \item Thời điểm kết thúc của mỗi Experiment
+			      \item Số lượng Test Group của mỗi Experiment
+		      \end{itemize}
+	\end{itemize}
+	\bfitem{/product/:id/layer/:id/exp/:id}{}
+	\begin{itemize}
+		\item Tên của Experiment
+		\item Traffic của Experiment
+		\item Trạng thái của Experiment
+		\item Thời điểm bắt đầu của Experiment
+		\item Thời điểm kết thúc của Experiment
+		\item Số lượng Test Group của Experiment
+		\item Toàn bộ Test Group của Experiment
+		      \begin{itemize}
+			      \item Id của mỗi Test Group
+			      \item Tên của mỗi Test Group
+			      \item Toàn bộ Parameter của Test Group
+			            \begin{itemize}
+				            \item Tên của mỗi Parameter
+				            \item Giá trị của mỗi Parameter
+			            \end{itemize}
+		      \end{itemize}
+	\end{itemize}
+\end{itemize}
 
 \subsubsection{Các thành phần}
 
@@ -241,6 +304,12 @@ Hệ thống frontend gồm các thành phần sau: Types, Pages, Services và C
 	\bfitem{Services}{Là thành phần xử lý hệ thống thông tin cho toàn bộ hệ thống Frontend, bao gồm cả việc nhận, gửi dữ liệu từ Server}
 	\bfitem{Components}{Chứa các thành phần chung giữa các trang}
 \end{itemize}
+
+% \begin{figure}[H]
+% 	\centering
+% 	\includegraphics[width = 0.7\textwidth]{frontend-structure}
+% 	\caption{Hệ thống Frontend}
+% \end{figure}
 
 \subsection{Hệ thống backend}
 
@@ -418,7 +487,7 @@ Product là thực thể lớn nhất, chỉ có chức năng phân tách theo n
 	\begin{tabular}{|l|l|l|}
 		\hline
 		Trường & Loại   & Chú thích       \\ \hline
-		id     & int    & Mã id định danh       \\ \hline
+		id     & int    & Mã id định danh \\ \hline
 		name   & string & Tên của Product \\ \hline
 	\end{tabular}
 	\caption{Thuộc tính của Product}
@@ -438,10 +507,10 @@ Cấu hình khi được lưu xuống cơ sở dữ liệu:
 	\centering
 	\begin{tabular}{|l|l|l|}
 		\hline
-		Trường & Loại   & Chú thích      \\ \hline
-		id     & int    & Mã id định danh      \\ \hline
-		name   & string & Tên của Layer  \\ \hline
-		type   & int    & Loại của Layer \\ \hline
+		Trường & Loại   & Chú thích       \\ \hline
+		id     & int    & Mã id định danh \\ \hline
+		name   & string & Tên của Layer   \\ \hline
+		type   & int    & Loại của Layer  \\ \hline
 	\end{tabular}
 	\caption{Thuộc tính của Layer}
 \end{table}
@@ -461,7 +530,7 @@ Cấu hình khi được lưu xuống cơ sở dữ liệu:
 	\begin{tabular}{|l|l|l|}
 		\hline
 		Trường      & Loại   & Chú thích          \\ \hline
-		id          & int    & Mã id định danh          \\ \hline
+		id          & int    & Mã id định danh    \\ \hline
 		name        & string & Tên của Experiment \\ \hline
 		traffic     & int    & Số lượng traffic   \\ \hline
 		start\_time & int    & Thời điểm bắt đầu  \\ \hline
@@ -486,7 +555,7 @@ Cấu hình khi được lưu xuống cơ sở dữ liệu:
 	\begin{tabular}{|l|l|l|}
 		\hline
 		Trường    & Loại   & Chú thích                \\ \hline
-		id        & int    & Mã id định danh                \\ \hline
+		id        & int    & Mã id định danh          \\ \hline
 		parameter & string & Parameter của Test Group \\ \hline
 		value     & string & Value của Parameter      \\ \hline
 	\end{tabular}
