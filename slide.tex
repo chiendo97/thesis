@@ -1,0 +1,56 @@
+% Quick start guide
+\documentclass{beamer}
+
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\usepackage[utf8]{vietnam}
+
+% \usetheme{default}
+\usetheme{Szeged}
+
+% Title page details
+\title{Hệ thống thực hiện A/B Test trong Quảng Cáo}
+\subtitle{Đồ án tốt nghiệp}
+\author{Lê Tiến Chiến}
+\institute{Ngành: Khoa học máy tính}
+\date{\today}
+
+% Image Logo
+% \logo{\includegraphics[width=1.5cm]{UET_logo.png}}
+% Load TikZ
+% \usepackage{tikz}
+% \titlegraphic { 
+%     \begin{tikzpicture}[overlay,remember picture]
+%         \node[left=0.1cm] at (current page.30){
+%             \includegraphics[width=1.5cm]{UET_logo.png}
+%         };
+%     \end{tikzpicture}
+% }
+
+% Current section
+\AtBeginSection[] {
+	\begin{frame}{Nội dung}
+		\tableofcontents[currentsection,hideothersubsections]
+	\end{frame}
+}
+
+\begin{document}
+
+\titlepage
+% \frame{\titlepage}
+
+% Presentation outline
+\begin{frame}{Nội dung}
+	\tableofcontents[hideallsubsections]
+\end{frame}
+
+\input{slides/chapter01}
+\input{slides/chapter02}
+\input{slides/chapter03}
+\input{slides/chapter04}
+\input{slides/chapter05}
+
+\end{document}

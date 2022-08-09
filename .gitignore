@@ -25,3 +25,5 @@
 *.nav
 *.snm
 *.bak*
+*.fdb_latexmk
+*.fls
