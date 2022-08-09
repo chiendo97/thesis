@@ -2,8 +2,17 @@
 
 \subsection{Domain Driven Design}
 
-\begin{frame}{Domain Driven Design là gì}
-	\alert{Domain-Driven Design} là một phương pháp trong việc phân tích và phát triển phần mềm trong khi giải quyết nghiệp vụ phức tạp. Ý tưởng của cách thức này là xây dựng sự kết nối chặt chẽ giữa thiết kế phần mềm và mô hình nghiệp vụ.
+\begin{frame}
+	\begin{block}{Domain Driven Design là gì}
+		\alert{Domain-Driven Design} là một phương pháp trong việc phân tích và phát triển phần mềm trong khi giải quyết nghiệp vụ phức tạp. Ý tưởng của cách thức này là xây dựng sự kết nối chặt chẽ giữa thiết kế phần mềm và mô hình nghiệp vụ.
+	\end{block}
+	\begin{description}
+		\item[Entity] Các đối tượng được định danh
+		\item[Value Object] Mô tả các khía cạnh của domain, bất biến, không có định danh
+		\item[Aggregate] Nhóm các Entity và Value Object, đảm bảo toàn vẹn và ràng buộc
+		\item[Service] Interface của hành động, chỉ quan tâm đến đối tượng xử lý bởi Service
+		\item[Repository] Nơi lưu trữ đối tượng, dùng để truy xuất toàn cục
+	\end{description}
 \end{frame}
 
 % \begin{frame}{Ba nguyên tắc}
@@ -22,15 +31,15 @@
 % 	\end{description}
 % \end{frame}
 
-\begin{frame}{Khuôn mẫu}
-	\begin{description}
-		\item[Entity] Các đối tượng được định danh
-		\item[Value Object] Mô tả các khía cạnh của domain, bất biến, không có định danh
-		\item[Aggregate] Nhóm các Entity và Value Object, đảm bảo toàn vẹn và ràng buộc
-		\item[Service] Interface của hành động, chỉ quan tâm đến đối tượng xử lý bởi Service
-		\item[Repository] Nơi lưu trữ đối tượng, dùng để truy xuất toàn cục
-	\end{description}
-\end{frame}
+% \begin{frame}{Khuôn mẫu}
+% 	\begin{description}
+% 		\item[Entity] Các đối tượng được định danh
+% 		\item[Value Object] Mô tả các khía cạnh của domain, bất biến, không có định danh
+% 		\item[Aggregate] Nhóm các Entity và Value Object, đảm bảo toàn vẹn và ràng buộc
+% 		\item[Service] Interface của hành động, chỉ quan tâm đến đối tượng xử lý bởi Service
+% 		\item[Repository] Nơi lưu trữ đối tượng, dùng để truy xuất toàn cục
+% 	\end{description}
+% \end{frame}
 
 % \subsection{Onion}
 %
@@ -91,16 +100,16 @@
 % 	\end{table}
 % \end{frame}
 
-\subsection{Biểu đồ tuần tự}
-
-\begin{frame}{Khởi tạo A/B Test}
-	\begin{figure}
-		\includegraphics[width = 1\textwidth]{abtest-sequence}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Thực hiện A/B Test}
-	\begin{figure}
-		\includegraphics[width = 1\textwidth]{overview-sequence}
-	\end{figure}
-\end{frame}
+% \subsection{Biểu đồ tuần tự}
+%
+% \begin{frame}{Khởi tạo A/B Test}
+% 	\begin{figure}
+% 		\includegraphics[width = 1\textwidth]{abtest-sequence}
+% 	\end{figure}
+% \end{frame}
+%
+% \begin{frame}{Thực hiện A/B Test}
+% 	\begin{figure}
+% 		\includegraphics[width = 1\textwidth]{overview-sequence}
+% 	\end{figure}
+% \end{frame}
