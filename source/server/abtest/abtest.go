@@ -1,0 +1,4 @@
+package abtest
+
+func Hash() {
+}
